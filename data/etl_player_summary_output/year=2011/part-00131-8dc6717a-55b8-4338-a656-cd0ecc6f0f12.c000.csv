@@ -1,0 +1,2 @@
+TEAM_ID,PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
+1610612737,2230,Maurice Evans,1.85,4.4,0.75,2.15,0.75,0.8,0.5,1.45,1.95,0.7,0.65,0.1,0.3,1.65,5.2,-2.95,37.0,88.0,15.0,43.0,15.0,16.0,10.0,29.0,39.0,14.0,13.0,2.0,6.0,33.0,104.0,-59.0,20,1217.9,24358.0

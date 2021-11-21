@@ -1,0 +1,4 @@
+TEAM_ID,PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
+1610612756,2554,Mickael Pietrus,4.75,10.0,2.5,5.75,1.25,1.5,0.0,2.25,2.25,0.5,1.0,0.5,1.5,2.75,13.25,-7.25,19.0,40.0,10.0,23.0,5.0,6.0,0.0,9.0,9.0,2.0,4.0,2.0,6.0,11.0,53.0,-29.0,4,1389.0,5556.0
+1610612746,2260,Jarron Collins,0.32,0.8,0.0,0.04,0.44,0.64,0.44,0.84,1.28,0.24,0.16,0.08,0.52,1.68,1.08,0.2631578947368421,8.0,20.0,0.0,1.0,11.0,16.0,11.0,21.0,32.0,6.0,4.0,2.0,13.0,42.0,27.0,5.0,25,344.72,8618.0
+1610612761,978,Peja Stojakovic,3.5,5.0,2.0,3.0,1.0,1.0,0.0,1.5,1.5,0.5,0.0,0.0,1.0,0.0,10.0,2.5,7.0,10.0,4.0,6.0,2.0,2.0,0.0,3.0,3.0,1.0,0.0,0.0,2.0,0.0,20.0,5.0,2,670.5,1341.0

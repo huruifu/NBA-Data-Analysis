@@ -38,7 +38,7 @@ def main(games_path, gmDetail_path, output):
 
     gamesAvg = gamesAvg.withColumn("seconds", to_sec(gamesAvg['MIN']))
 
-    gamesAvg2 = gamesAvg.groupBy(functions.year('GAME_DATE').alias("year"),'TEAM_ID','PLAYER_ID').agg(avg('FGM'),avg('FGA'),\
+    gamesAvg2 = gamesAvg.groupBy(functions.year('GAME_DATE').alias("year"),'TEAM_ID','PLAYER_ID', 'PLAYER_NAME').agg(avg('FGM'),avg('FGA'),\
                 avg('FG3M'),avg('FG3A'),avg('FTM'),avg('FTA'),avg('OREB'),avg('DREB'),avg('REB'),avg('AST'),avg('STL'),avg('BLK'),\
                 avg('TO'),avg('PF'),avg('PTS'),avg('PLUS_MINUS'),sum('FGM'),sum('FGA'),sum('FG3M'),sum('FG3A'),sum('FTM'),sum('FTA'),\
                 sum('OREB'),sum('DREB'),sum('REB'),sum('AST'),sum('STL'),sum('BLK'),sum('TO'),sum('PF'),sum('PTS'),sum('PLUS_MINUS'),\
@@ -46,7 +46,7 @@ def main(games_path, gmDetail_path, output):
 
     gamesAvg2.write.partitionBy("year") \
         .mode("overwrite") \
-        .option("header", "false").option("sep", "\t") \
+        .option("header", "true").option("sep", ",") \
         .csv(output)
 
 

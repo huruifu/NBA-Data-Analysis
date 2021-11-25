@@ -1,0 +1,4 @@
+TEAM_ID,PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
+1610612762,2224,Jamaal Tinsley,0.4,0.6,0.0,0.2,0.4,0.4,0.2,1.4,1.6,1.4,0.6,0.6,1.0,1.0,1.2,3.5,2.0,3.0,0.0,1.0,2.0,2.0,1.0,7.0,8.0,7.0,3.0,3.0,5.0,5.0,6.0,14.0,5,189.6,948.0
+1610612743,201147,Corey Brewer,2.8,6.4,0.4,1.2,1.0,1.8,1.0,1.8,2.8,0.4,1.2,0.0,1.0,1.2,7.0,-3.3333333333333335,14.0,32.0,2.0,6.0,5.0,9.0,5.0,9.0,14.0,2.0,6.0,0.0,5.0,6.0,35.0,-10.0,5,319.4,1597.0
+1610612742,201157,Sean Williams,2.5,3.0,0.0,0.0,2.0,2.0,1.5,1.0,2.5,0.0,0.5,0.5,1.5,3.5,7.0,2.5,5.0,6.0,0.0,0.0,4.0,4.0,3.0,2.0,5.0,0.0,1.0,1.0,3.0,7.0,14.0,5.0,2,459.0,918.0

@@ -26,18 +26,13 @@ def plot_barhgraph(row_list, x, y, title):
     plt.show()     
     
 def plot_wordfrequency(row_list):
-    print(row_list)
-    comment_words = ''
+    # comment_words = ''
     stopwords = set(STOPWORDS)
-    for row in row_list:
-        print(row)
-        injury_name = row["injury_name"]
-        print(injury_name)
-        comment_words += " ".join(injury_name)+" "
-        wordcloud = WordCloud(width = 800, height = 800,
-                background_color ='white',
-                stopwords = stopwords,
-                min_font_size = 10).generate(comment_words)
+    text = " ".join(row["injury_name"] for row in row_list)
+    # for row in row_list:
+    #     injury_name = row["injury_name"].lower()
+    #     comment_words += injury_name + " "
+    wordcloud = WordCloud(width=800, height=800, background_color='white', stopwords=stopwords).generate(text)
     # plot the WordCloud image                      
     plt.figure(figsize = (8, 8), facecolor = None)
     plt.imshow(wordcloud)

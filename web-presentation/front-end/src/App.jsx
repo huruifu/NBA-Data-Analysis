@@ -7,8 +7,8 @@ import "./App.css";
 import MainNavigation from "./components/mainNavigation/mainNavigation";
 
 // import pages
-import HomePage from "./pages/homePage";
-import AgeInjuryPlayerPage from "./pages/ageInjuryPlayerPage";
+import HomePage from "./pages/homePage/homePage";
+import AgeInjuryPlayerPage from "./pages/ageInjuryPlayerPage/ageInjuryPlayerPage";
 
 class App extends React.Component {
   render() {

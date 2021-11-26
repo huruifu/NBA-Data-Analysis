@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import AgeInjuryPlayer from "../components/ageInjuryPlayer/ageInjuryPlayer";
+import AgeInjuryPlayer from "../../components/ageInjuryPlayer/ageInjuryPlayer";
 
 class AgeInjuryPlayerPage extends React.Component {
   render() {

@@ -187,6 +187,7 @@ def main(injuries_inputs, player_info_inputs):
     print('Training score for model: %g' % (validation_score, )) 
     
     
+    
 if __name__ == '__main__':
     injuries_inputs = sys.argv[1]
     player_info_inputs = sys.argv[2]

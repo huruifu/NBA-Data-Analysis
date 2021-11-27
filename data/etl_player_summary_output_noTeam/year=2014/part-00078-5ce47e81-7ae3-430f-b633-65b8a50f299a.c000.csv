@@ -1,0 +1,2 @@
+PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
+203957,Dante Exum,1.75,4.525,0.825,2.45,0.725,1.05,0.175,1.325,1.5,2.075,0.45,0.2,1.425,1.6,5.05,-0.225,70.0,181.0,33.0,98.0,29.0,42.0,7.0,53.0,60.0,83.0,18.0,8.0,57.0,64.0,202.0,-9.0,40,1112.05,44482.0

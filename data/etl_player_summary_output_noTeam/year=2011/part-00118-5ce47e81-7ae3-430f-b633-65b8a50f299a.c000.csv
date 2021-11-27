@@ -1,0 +1,4 @@
+PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
+201814,Gary Forbes,1.65,3.925,0.2,0.825,0.875,1.25,0.35,1.45,1.8,0.925,0.4,0.05,0.725,1.125,4.375,0.6842105263157895,66.0,157.0,8.0,33.0,35.0,50.0,14.0,58.0,72.0,37.0,16.0,2.0,29.0,45.0,175.0,26.0,40,656.125,26245.0
+101123,Gerald Green,0.0,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,2.0,0.0,"",0.0,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,2.0,0.0,"",1,8.0,8.0
+2648,Ronald Dupree,0.5,2.0,0.0,0.5,0.0,0.0,0.0,1.5,1.5,0.5,0.0,0.0,0.0,1.0,1.0,-3.5,1.0,4.0,0.0,1.0,0.0,0.0,0.0,3.0,3.0,1.0,0.0,0.0,0.0,2.0,2.0,-7.0,2,344.5,689.0

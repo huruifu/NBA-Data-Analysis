@@ -1,0 +1,4 @@
+PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
+202342,Craig Brackins,1.0,2.75,0.75,1.75,0.0,0.0,0.0,0.5,0.5,0.75,0.0,0.0,0.25,0.75,2.75,-2.0,4.0,11.0,3.0,7.0,0.0,0.0,0.0,2.0,2.0,3.0,0.0,0.0,1.0,3.0,11.0,-6.0,4,276.75,1107.0
+202731,Vernon Macklin,0.3333333333333333,0.6666666666666666,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.6666666666666666,4.5,1.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,9.0,3,87.66666666666667,263.0
+122683568,Vernon Macklin,1.0,2.0,0.0,0.0,0.0,0.0,1.0,4.0,5.0,0.0,0.0,0.0,1.0,1.0,2.0,"",1.0,2.0,0.0,0.0,0.0,0.0,1.0,4.0,5.0,0.0,0.0,0.0,1.0,1.0,2.0,"",1,9.0,9.0

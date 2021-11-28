@@ -2,9 +2,9 @@ import React, { Component } from "react";
 
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
-import Nav from "react-bootstrap/Nav"
+import Nav from "react-bootstrap/Nav";
 
-class MainNavigation extends React.Component {
+class MainNavigation extends Component {
   render() {
     return (
         <div>

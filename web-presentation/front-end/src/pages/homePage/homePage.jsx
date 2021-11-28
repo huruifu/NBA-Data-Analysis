@@ -4,7 +4,7 @@ import Image from "react-bootstrap/Image";
 import "./homePage.css";
 
 
-class HomePage extends React.Component {
+class HomePage extends Component {
   state = {
     backgroundImgPath: "/images/background.jpg"
   };

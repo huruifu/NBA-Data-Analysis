@@ -38,7 +38,23 @@ def plot_wordfrequency(row_list):
     plt.imshow(wordcloud)
     plt.axis("off")
     plt.tight_layout(pad = 0)
-    plt.show()    
+    plt.show()  
+    
+def plot_validation_result(predicts, actuals):
+    predicts_np = np.array(predicts)
+    actuals_np = np.array(actuals)
+    plt.figure(figsize=(10,10))
+    plt.scatter(predicts_np, actuals_np, c='crimson')
+    plt.yscale('log')
+    plt.xscale('log')
+    p1 = max(max(predicts_np), max(actuals_np))
+    p2 = min(min(predicts_np), min(actuals_np))
+    plt.plot([p1, p2], [p1, p2], 'b-')
+    plt.xlabel('Predictions', fontsize=15)
+    plt.ylabel('True Values', fontsize=15)
+    plt.axis('equal')
+    plt.show()
+          
           
     
     

@@ -1,8 +1,11 @@
 from pyspark.sql import SparkSession, functions, types
 from pyspark.ml import Pipeline
-from pyspark.ml.feature import StringIndexer, VectorAssembler, SQLTransformer
-from pyspark.ml.regression import GBTRegressor, RandomForestRegressor, GeneralizedLinearRegression, LinearRegression
+from pyspark.ml.feature import StringIndexer, OneHotEncoder, VectorAssembler, SQLTransformer
+from pyspark.ml.regression import GBTRegressor, RandomForestRegressor, LinearRegression
+from pyspark.ml.tuning import ParamGridBuilder, CrossValidator
 from pyspark.ml.evaluation import RegressionEvaluator
+
+from plot_tools import plot_validation_result
 
 import re
 import sys
@@ -29,6 +32,7 @@ def main():
         types.StructField('totalFg3m', types.FloatType()),
         types.StructField('totalFga', types.FloatType()),
         types.StructField('totalFgm', types.FloatType()),
+        types.StructField('totalGames', types.FloatType()),
         types.StructField('injury_name', types.StringType()),
         types.StructField('status', types.StringType()),
         types.StructField('count', types.FloatType()),
@@ -46,7 +50,9 @@ def main():
               .csv(player_inputs)
               .repartition(8))
 
-    train, validation = player.randomSplit([0.8, 0.2])
+    train, validation = player.randomSplit([0.6, 0.4])
+    print(train.count())
+    print(validation.count())
     train = train.cache()
     validation = validation.cache()
     position_indexer = StringIndexer(
@@ -54,46 +60,181 @@ def main():
     status_indexer = StringIndexer(
         inputCol="status", outputCol="status_index", stringOrderType="frequencyDesc", handleInvalid="skip")
     
+    position_encoder = OneHotEncoder(inputCol="player_position_index", outputCol="player_position_encoder")
+    status_encoder = OneHotEncoder(inputCol="status_index", outputCol="status_encoder")
+    
     # training models predicting total pts in the next season
-    vectorAssembler = VectorAssembler(inputCols=["age1", "status_index", "count", "player_height", "player_weight",
-                                                 "player_position_index", "age2", "totalPts"],
+    # experiment
+    # vectorAssembler = VectorAssembler(inputCols=["age", "status_index", "count", "height", "weight",
+    #                                              "player_position_index", "avgPts",
+    #                                              "nextSeasonAge", "nextSeasonHeight", "nextSeasonWeight"],
+    #                                   outputCol="features")
+    # vectorAssembler = VectorAssembler(inputCols=["status_index", "count", "height", "weight",
+    #                                              "player_position_index", "avgPts",
+    #                                              "nextSeasonAge", "nextSeasonHeight", "nextSeasonWeight"],
+    #                                   outputCol="features")
+    # vectorAssembler = VectorAssembler(inputCols=["status_index", "count", "height",
+    #                                              "player_position_index", "avgPts",
+    #                                              "nextSeasonAge", "nextSeasonWeight"],
+    #                                   outputCol="features")
+    # used
+    # vectorAssembler = VectorAssembler(inputCols=["count", "height",
+    #                                              "player_position_index", "avgPts",
+    #                                              "nextSeasonAge", "nextSeasonWeight"],
+    #                                   outputCol="features")
+    # r2_evaluator = RegressionEvaluator(
+    #     predictionCol="prediction", labelCol="nextSeasonAvgPts", metricName="r2")
+    # sqlStatement = (
+    #     """
+    # SELECT t0.age, t0.status, t0.count, t0.player_height AS height, t0.player_weight AS weight,
+    # (t0.totalPts / t0.totalGames) AS avgPts, t1.player_position, t1.age AS nextSeasonAge,
+    # t1.player_height AS nextSeasonHeight, t1.player_weight AS nextSeasonWeight,
+    # (t1.totalPts / t1.totalGames) AS nextSeasonAvgPts
+    # FROM __THIS__ as t0
+    # INNER JOIN __THIS__ as t1
+    # ON t0.year + 1 = t1.year
+    # AND t0.PLAYER_NAME = t1.PLAYER_NAME
+    # """)
+
+    # rfr = RandomForestRegressor(featuresCol="features", labelCol="nextSeasonAvgPts",
+    #                     numTrees=5, maxDepth=3, seed=42)
+    # grid = (ParamGridBuilder()
+    #         .baseOn({rfr.labelCol: 'nextSeasonAvgPts'}) 
+    #         .baseOn([rfr.featuresCol, "features"])
+    #         .baseOn([rfr.predictionCol, 'prediction']) 
+    #         .build())
+    # cv = CrossValidator(estimator=rfr, estimatorParamMaps=grid, evaluator=r2_evaluator, numFolds=3)
+    # pipelineCV = Pipeline(stages=[SQLTransformer(statement=sqlStatement), position_indexer, status_indexer,
+    #                                 vectorAssembler, cv])
+    # rfrModelCV = pipelineCV.fit(train)
+    # trainDF = rfrModelCV.transform(train)
+    # r2_train = r2_evaluator.evaluate(trainDF)
+    # print(f"r2 training for predicting nextSeasonAvgPts is {r2_train}")
+    # predDF = rfrModelCV.transform(validation)
+    # r2 = r2_evaluator.evaluate(predDF)
+    # print(f"r2 validation for predicting nextSeasonAvgPts is {r2}")
+    # treeCV = rfrModelCV.stages[-1].bestModel
+    # trainDF.groupBy("player_position", "player_position_index").agg(functions.count("*")).show()
+    # print(predDF.count())
+    # print(treeCV.featureImportances.toArray())
+    # print(treeCV.toDebugString)
+    # plot_validation_result(predDF.select("prediction").collect(), predDF.select("nextSeasonAvgPts").collect())
+    
+    
+    # training models predicting total To in the next season
+    # vectorAssembler = VectorAssembler(inputCols=["age", "status_index", "count", "height", "weight",
+    #                                              "player_position_index", "avgTos",
+    #                                              "nextSeasonAge", "nextSeasonHeight", "nextSeasonWeight"],
+    #                                   outputCol="features")
+    # rmse_evaluator = RegressionEvaluator(
+    #     predictionCol="prediction", labelCol="nextSeasonAvgTo", metricName="rmse")
+    # r2_evaluator = RegressionEvaluator(
+    #     predictionCol="prediction", labelCol="nextSeasonAvgTo", metricName="r2")
+    # sqlStatement = (
+    #     """
+    # SELECT t0.age, t0.status, t0.count, t0.player_height AS height, t0.player_weight AS weight,
+    # (t0.totalTo / t0.totalGames) AS avgTos, t1.player_position, t1.age AS nextSeasonAge,
+    # t1.player_height AS nextSeasonHeight, t1.player_weight AS nextSeasonWeight,
+    # (t1.totalTo / t1.totalGames) AS nextSeasonAvgTo
+    # FROM __THIS__ as t0
+    # INNER JOIN __THIS__ as t1
+    # ON t0.year + 1 = t1.year
+    # AND t0.PLAYER_NAME = t1.PLAYER_NAME
+    # """)
+    
+    # gbtr = GBTRegressor(featuresCol="features", labelCol="nextSeasonAvgTo", maxIter=8,
+    #                     maxDepth=5, stepSize=0.1, seed=42, featureSubsetStrategy='all')
+    # gbtrPipeline = Pipeline(stages=[SQLTransformer(statement=sqlStatement), position_indexer, status_indexer,
+    #                                 vectorAssembler, gbtr])
+    # gbtrPipelineModel = gbtrPipeline.fit(train)
+    # trainDF = gbtrPipelineModel.transform(train)
+    # rmse_train = rmse_evaluator.evaluate(trainDF)
+    # r2_train = r2_evaluator.evaluate(trainDF)
+    # print(f"RMSE training for predicting nextSeasonAvgTo is {rmse_train}")
+    # print(f"r2 training for predicting nextSeasonAvgTo is {r2_train}")
+    # predDF = gbtrPipelineModel.transform(validation)
+    # rmse = rmse_evaluator.evaluate(predDF)
+    # r2 = r2_evaluator.evaluate(predDF)
+    # print(f"RMSE validation for predicting nextSeasonAvgTo is {rmse}")
+    # print(f"r2 validation for predicting nextSeasonAvgTo is {r2}")
+    # print(predDF.count())
+    # plot_validation_result(predDF.select("prediction").collect(), predDF.select("nextSeasonAvgTo").collect())
+    # gbtrPipelineModel.write().overwrite().save(outputs)
+    
+    # predict next avg assistance
+    vectorAssembler = VectorAssembler(inputCols=["player_position_encoder", "status_encoder", "age", "count",
+                                                 "height", "weight", "avgAst",
+                                                 "nextSeasonAge", "nextSeasonHeight", "nextSeasonWeight"],
                                       outputCol="features")
     rmse_evaluator = RegressionEvaluator(
-        predictionCol="prediction", labelCol="nextSeasonPts", metricName="rmse")
+        predictionCol="prediction", labelCol="nextSeasonAvgAst", metricName="rmse")
     r2_evaluator = RegressionEvaluator(
-        predictionCol="prediction", labelCol="nextSeasonPts", metricName="r2")
+        predictionCol="prediction", labelCol="nextSeasonAvgAst", metricName="r2")
     sqlStatement = (
         """
-    SELECT t0.age AS age1, t0.status, t0.count, t1.player_height, t1.player_weight, t1.player_position,
-    t1.age AS age2, t0.totalPts, t1.totalPts AS nextSeasonPts
+    SELECT t0.age, t0.status, t0.count, t0.player_height AS height, t0.player_weight AS weight,
+    (t0.totalAst / t0.totalGames) AS avgAst, t1.player_position, t1.age AS nextSeasonAge,
+    t1.player_height AS nextSeasonHeight, t1.player_weight AS nextSeasonWeight,
+    (t1.totalAst / t1.totalGames) AS nextSeasonAvgAst
     FROM __THIS__ as t0
     INNER JOIN __THIS__ as t1
     ON t0.year + 1 = t1.year
     AND t0.PLAYER_NAME = t1.PLAYER_NAME
     """)
-    position_indexer = StringIndexer(
-        inputCol="player_position", outputCol="player_position_index", stringOrderType="frequencyDesc", handleInvalid="skip")
-    status_indexer = StringIndexer(
-        inputCol="status", outputCol="status_index", stringOrderType="frequencyDesc", handleInvalid="skip")
-
-    # gbtr = GBTRegressor(featuresCol="features", labelCol="nextSeasonPts", maxIter=10,
-    #                     maxDepth=5, stepSize=0.1, seed=42, featureSubsetStrategy='all')
-    # gbtrPipeline = Pipeline(stages=[SQLTransformer(statement=sqlStatement), position_indexer, status_indexer,
-    #                                 vectorAssembler, gbtr])
-    # gbtrPipelineModel = gbtrPipeline.fit(train)
-    # trainDF = gbtrPipelineModel.transform(train)
-    # rmse_train = rmse_evaluator.evaluate(trainDF)
-    # r2_train = r2_evaluator.evaluate(trainDF)
-    # print(f"RMSE training for predicting nextSeasonPts is {rmse_train}")
-    # print(f"r2 training for predicting nextSeasonPts is {r2_train}")
-    # predDF = gbtrPipelineModel.transform(validation)
-    # rmse = rmse_evaluator.evaluate(predDF)
-    # r2 = r2_evaluator.evaluate(predDF)
-    # print(f"RMSE validation for predicting nextSeasonPts is {rmse}")
-    # print(f"r2 validation for predicting nextSeasonPts is {r2}")
-    # gbtrPipelineModel.write().overwrite().save(outputs)
-
-    # rfr = RandomForestRegressor(featuresCol="features", labelCol="nextSeasonPts",
+    
+    lr = LinearRegression(featuresCol="features", labelCol="nextSeasonAvgAst", maxIter=4)
+    grid = (ParamGridBuilder()
+            .addGrid(lr.maxIter, [1, 4])
+            .addGrid(lr.regParam, [0.1, 0.01])
+            .addGrid(lr.regParam, [0])
+            .addGrid(lr.elasticNetParam, [0.0, 1.0])
+            .build())
+    cv = CrossValidator(estimator=lr, estimatorParamMaps=grid, evaluator=r2_evaluator, numFolds=10)
+    pipelineCV = Pipeline(stages=[SQLTransformer(statement=sqlStatement), position_indexer, status_indexer,
+                                    position_encoder, status_encoder, vectorAssembler, cv])
+    lrModelCV = pipelineCV.fit(train)
+    trainDF = lrModelCV.transform(train)
+    r2_train = r2_evaluator.evaluate(trainDF)
+    print(f"r2 training for predicting nextSeasonAvgAst is {r2_train}")
+    predDF = lrModelCV.transform(validation)
+    r2 = r2_evaluator.evaluate(predDF)
+    print(f"r2 validation for predicting nextSeasonAvgAst is {r2}")
+    lrCV = lrModelCV.stages[-1].bestModel
+    trainDF.groupBy("player_position", "player_position_encoder").agg(functions.count("*")).show()
+    trainDF.groupBy("status", "status_encoder").agg(functions.count("*")).show()
+    # print(predDF.count())
+    print(predDF.count())
+    # print(treeCV.featureImportances.toArray())
+    print(lrCV.coefficients)
+    print(lrCV.intercept)
+    plot_validation_result(predDF.select("prediction").collect(), predDF.select("nextSeasonAvgAst").collect())    
+    
+    
+    
+    
+    
+    # next season avg fgp
+    # vectorAssembler = VectorAssembler(inputCols=["age", "status_index", "count", "height", "weight",
+    #                                              "player_position_index", "avgFgp",
+    #                                              "nextSeasonAge", "nextSeasonHeight", "nextSeasonWeight"],
+    #                                   outputCol="features")
+    # rmse_evaluator = RegressionEvaluator(
+    #     predictionCol="prediction", labelCol="nextSeasonAvgFgp", metricName="rmse")
+    # r2_evaluator = RegressionEvaluator(
+    #     predictionCol="prediction", labelCol="nextSeasonAvgFgp", metricName="r2")
+    # sqlStatement = (
+    #     """
+    # SELECT t0.age, t0.status, t0.count, t0.player_height AS height, t0.player_weight AS weight,
+    # (t0.totalFgm / t0.totalFga) AS avgFgp, t1.player_position, t1.age AS nextSeasonAge,
+    # t1.player_height AS nextSeasonHeight, t1.player_weight AS nextSeasonWeight,
+    # (t1.totalFgm / t1.totalFga) AS nextSeasonAvgFgp
+    # FROM __THIS__ as t0
+    # INNER JOIN __THIS__ as t1
+    # ON t0.year + 1 = t1.year
+    # AND t0.PLAYER_NAME = t1.PLAYER_NAME
+    # """)
+    
+    # rfr = RandomForestRegressor(featuresCol="features", labelCol="nextSeasonAvgFgp",
     #                     numTrees=8, maxDepth=5, seed=42)
     # rfrPipeline = Pipeline(stages=[SQLTransformer(statement=sqlStatement), position_indexer, status_indexer,
     #                                 vectorAssembler, rfr])
@@ -101,115 +242,16 @@ def main():
     # trainDF = rfrPipelineModel.transform(train)
     # rmse_train = rmse_evaluator.evaluate(trainDF)
     # r2_train = r2_evaluator.evaluate(trainDF)
-    # print(f"RMSE training for predicting nextSeasonPts is {rmse_train}")
-    # print(f"r2 training for predicting nextSeasonPts is {r2_train}")
+    # print(f"RMSE training for predicting nextSeasonAvgFgp is {rmse_train}")
+    # print(f"r2 training for predicting nextSeasonAvgFgp is {r2_train}")
     # predDF = rfrPipelineModel.transform(validation)
     # rmse = rmse_evaluator.evaluate(predDF)
     # r2 = r2_evaluator.evaluate(predDF)
-    # print(f"RMSE validation for predicting nextSeasonPts is {rmse}")
-    # print(f"r2 validation for predicting nextSeasonPts is {r2}")
-    # rfrPipelineModel.write().overwrite().save(outputs)
-    
-    # training models predicting total To in the next season
-    # vectorAssembler = VectorAssembler(inputCols=["age1", "status_index", "count", "player_height", "player_weight",
-    #                                              "player_position_index", "age2", "totalTo"],
-    #                                   outputCol="features")
-    # rmse_evaluator = RegressionEvaluator(
-    #     predictionCol="prediction", labelCol="nextSeasonTo", metricName="rmse")
-    # r2_evaluator = RegressionEvaluator(
-    #     predictionCol="prediction", labelCol="nextSeasonTo", metricName="r2")
-    # sqlStatement = (
-    #     """
-    # SELECT t0.age AS age1, t0.status, t0.count, t1.player_height, t1.player_weight, t1.player_position,
-    # t1.age AS age2, t0.totalTo, t1.totalTo AS nextSeasonTo
-    # FROM __THIS__ as t0
-    # INNER JOIN __THIS__ as t1
-    # ON t0.year + 1 = t1.year
-    # AND t0.PLAYER_NAME = t1.PLAYER_NAME
-    # """)
-    # rfr = RandomForestRegressor(featuresCol="features", labelCol="nextSeasonTo",
-    #                     numTrees=8, maxDepth=5, seed=42)
-    # rfrPipeline = Pipeline(stages=[SQLTransformer(statement=sqlStatement), position_indexer, status_indexer,
-    #                                 vectorAssembler, rfr])
-    # rfrPipelineModel = rfrPipeline.fit(train)
-    # trainDF = rfrPipelineModel.transform(train)
-    # rmse_train = rmse_evaluator.evaluate(trainDF)
-    # r2_train = r2_evaluator.evaluate(trainDF)
-    # print(f"Using GBTRegressor, RMSE training is {rmse_train}")
-    # print(f"Using GBTRegressor, r2 training is {r2_train}")
-    # predDF = rfrPipelineModel.transform(validation)
-    # rmse = rmse_evaluator.evaluate(predDF)
-    # r2 = r2_evaluator.evaluate(predDF)
-    # print(f"Using GBTRegressor, RMSE validation is {rmse}")
-    # print(f"Using GBTRegressor, r2 validation is {r2}")
-    # rfrPipelineModel.write().overwrite().save(outputs)
-    
-    # gbtr = GBTRegressor(featuresCol="features", labelCol="nextSeasonTo", maxIter=8,
-    #                     maxDepth=5, stepSize=0.1, seed=42, featureSubsetStrategy='all')
-    # gbtrPipeline = Pipeline(stages=[SQLTransformer(statement=sqlStatement), position_indexer, status_indexer,
-    #                                 vectorAssembler, gbtr])
-    # gbtrPipelineModel = gbtrPipeline.fit(train)
-    # trainDF = gbtrPipelineModel.transform(train)
-    # rmse_train = rmse_evaluator.evaluate(trainDF)
-    # r2_train = r2_evaluator.evaluate(trainDF)
-    # print(f"RMSE training for predicting nextSeasonTo is {rmse_train}")
-    # print(f"r2 training for predicting nextSeasonTo is {r2_train}")
-    # predDF = gbtrPipelineModel.transform(validation)
-    # rmse = rmse_evaluator.evaluate(predDF)
-    # r2 = r2_evaluator.evaluate(predDF)
-    # print(f"RMSE validation for predicting nextSeasonTo is {rmse}")
-    # print(f"r2 validation for predicting nextSeasonTo is {r2}")
-    # gbtrPipelineModel.write().overwrite().save(outputs)
-    
-    # predict number of injuries next season, does not have accurate model
-    # vectorAssembler = VectorAssembler(inputCols=["age1", "status_index", "count", "player_height", "player_weight",
-    #                                              "player_position_index", "age2"],
-    #                                   outputCol="features")
-    # rmse_evaluator = RegressionEvaluator(
-    #     predictionCol="prediction", labelCol="nextSeasonCount", metricName="rmse")
-    # r2_evaluator = RegressionEvaluator(
-    #     predictionCol="prediction", labelCol="nextSeasonCount", metricName="r2")
-    # sqlStatement = (
-    #     """
-    # SELECT t0.age AS age1, t0.status, t0.count, t1.player_height, t1.player_weight, t1.player_position,
-    # t1.age AS age2, t0.totalTo, t1.count AS nextSeasonCount
-    # FROM __THIS__ as t0
-    # INNER JOIN __THIS__ as t1
-    # ON t0.year + 1 = t1.year
-    # AND t0.PLAYER_NAME = t1.PLAYER_NAME
-    # """)
-    
-    # lr = LinearRegression(featuresCol="features", labelCol="nextSeasonCount", regParam=2, maxIter=5)
-    # lrPipeline = Pipeline(stages=[SQLTransformer(statement=sqlStatement), position_indexer, status_indexer,
-    #                                 vectorAssembler, lr])
-    # lrPipelineModel = lrPipeline.fit(train)
-    # trainDF = lrPipelineModel.transform(train)
-    # rmse_train = rmse_evaluator.evaluate(trainDF)
-    # r2_train = r2_evaluator.evaluate(trainDF)
-    # print(f"RMSE training for predicting nextSeasonCount is {rmse_train}")
-    # print(f"r2 training for predicting nextSeasonCount is {r2_train}")
-    # predDF = lrPipelineModel.transform(validation)
-    # rmse = rmse_evaluator.evaluate(predDF)
-    # r2 = r2_evaluator.evaluate(predDF)
-    # print(f"RMSE validation for predicting nextSeasonCount is {rmse}")
-    # print(f"r2 validation for predicting nextSeasonCount is {r2}")
-    # lrPipelineModel.write().overwrite().save(outputs)
-    
-    # rfr = RandomForestRegressor(featuresCol="features", labelCol="nextSeasonCount",
-    #                     numTrees=10, maxDepth=10, seed=42)
-    # rfrPipeline = Pipeline(stages=[SQLTransformer(statement=sqlStatement), position_indexer, status_indexer,
-    #                                 vectorAssembler, rfr])
-    # rfrPipelineModel = rfrPipeline.fit(train)
-    # trainDF = rfrPipelineModel.transform(train)
-    # rmse_train = rmse_evaluator.evaluate(trainDF)
-    # r2_train = r2_evaluator.evaluate(trainDF)
-    # print(f"RMSE training for predicting nextSeasonCount is {rmse_train}")
-    # print(f"r2 training for predicting nextSeasonCount is {r2_train}")
-    # predDF = rfrPipelineModel.transform(validation)
-    # rmse = rmse_evaluator.evaluate(predDF)
-    # r2 = r2_evaluator.evaluate(predDF)
-    # print(f"RMSE validation for predicting nextSeasonCount is {rmse}")
-    # print(f"r2 validation for predicting nextSeasonCount is {r2}")
+    # print(f"RMSE validation for predicting nextSeasonAvgFgp is {rmse}")
+    # print(f"r2 validation for predicting nextSeasonAvgFgp is {r2}")
+    # print(predDF.count())
+    # print(rfrPipelineModel.stages[-1].toDebugString)
+    # plot_validation_result(predDF.select("prediction").collect(), predDF.select("nextSeasonAvgFgp").collect())
     # rfrPipelineModel.write().overwrite().save(outputs)
 
 

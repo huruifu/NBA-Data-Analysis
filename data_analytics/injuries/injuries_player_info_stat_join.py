@@ -101,6 +101,7 @@ def main():
                         ).alias("totalFg3m"),
           functions.sum(functions.col("sum(FGA)")).alias("totalFga"),
           functions.sum(functions.col("sum(FGM)")).alias("totalFgm"),
+          functions.sum(functions.col("sum(ifminute)")).alias("totalGames"),
           functions.first("injury_name").alias("injury_name"),
           functions.first("status").alias("status"),
           functions.first("count").alias("count"),

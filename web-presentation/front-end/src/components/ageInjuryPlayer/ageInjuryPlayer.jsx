@@ -18,6 +18,8 @@ class AgeInjuryPlayer extends Component {
     codeSnippetPath: "/images/code_snippet.png",
     avgPtsModelImgPath: "/images/trueVsActualAvgPts.png",
     avgAstModelImgPath: "/images/PredVsActualAvgAst.png",
+    correlationImgPath: "/images/correlation.png",
+    avgAstCorrImgPath: "/images/avgAstCorr.png",
     injuryTypeImgs: [
       {
         imgPath: "/images/c_injury_type.png",
@@ -101,6 +103,12 @@ class AgeInjuryPlayer extends Component {
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="3">
+          <Accordion.Header>Feature Correlation</Accordion.Header>
+          <Accordion.Body>
+          <Image src={this.state.correlationImgPath} fluid />
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="4">
           <Accordion.Header>
             Predicting players' avg stat in next season
           </Accordion.Header>
@@ -112,11 +120,12 @@ class AgeInjuryPlayer extends Component {
             <AvgPtsModal value={this.state.avgPtsShow} onHandleClose={this.handleAvgPtsClose}/>
           </Accordion.Body>
         </Accordion.Item>
-        <Accordion.Item eventKey="4">
+        <Accordion.Item eventKey="5">
           <Accordion.Header>
             Predicting players' avg ast in next season
           </Accordion.Header>
           <Accordion.Body>
+          <Image src={this.state.avgAstCorrImgPath} fluid />
           <Image src={this.state.avgAstModelImgPath} fluid />
             <Button variant="primary" onClick={this.handleAvgAstShow}>
               Launch demo

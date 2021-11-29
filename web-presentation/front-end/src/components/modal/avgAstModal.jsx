@@ -9,10 +9,10 @@ import Col from "react-bootstrap/Col";
 
 class AvgAstModal extends React.Component {
   state = {
-    age: 0,
+    // age: 0,
     count: 0,
-    height: 0,
-    weight: 0,
+    // height: 0,
+    // weight: 0,
     avgAst: 0,
     nextSeasonAge: 0,
     nextSeasonHeight: 0,
@@ -23,31 +23,29 @@ class AvgAstModal extends React.Component {
 
   predict = () => {
     let predictValue =
-      this.state.age * 0.5495510867660398 +
-      this.state.count * 0.001951171228582191 +
-      this.state.height * 0.06066350111162505 +
-      this.state.weight * -0.023107691576517563 +
-      this.state.avgAst * 0.8706604491917964 +
-      this.state.nextSeasonAge * -0.5801353991084546 +
-      this.state.nextSeasonHeight * -0.06718100228160792 +
-      this.state.nextSeasonWeight * 0.027171368759090632 +
+      this.state.count * (-0.009854868617951875) +
+      this.state.avgAst * 0.8819662904757689 +
+      this.state.nextSeasonAge * (-0.03608371595506181) +
+      this.state.nextSeasonHeight * (-2.3131297988292498e-05) +
+      this.state.nextSeasonWeight * 0.0011553979373318322 +
       this.getStatusWeight() +
-      this.getPositionWeight();
+      this.getPositionWeight() + 
+      1.4367413155385134;
     return predictValue.toFixed(2);
   };
 
   getStatusWeight = () => {
     switch (this.state.status_index) {
       case 0:
-        return -0.22447935543034217;
+        return -0.12910361164272233;
       case 1:
-        return -0.22393625141922494;
+        return -0.1997729325661938;
       case 2:
-        return -0.3586709904292356;
+        return -0.3777806362715741;
       case 3:
-        return -0.32869834825058164;
+        return -0.24900335804547918;
       case 4:
-        return -0.2878710191775542;
+        return -0.1726787816961902;
       default:
         return 0;
     }
@@ -56,27 +54,27 @@ class AvgAstModal extends React.Component {
   getPositionWeight = () => {
     switch (this.state.player_position_index) {
       case 0:
-        return 0.5686275766604322;
+        return 0.24198585636978817;
       case 1:
-        return 0.3441569835032559;
+        return -0.057876978663253566;
       case 2:
-        return 0.3366598783632808;
+        return -0.09194479089534115;
       case 3:
-        return 0.32985764466270145;
+        return -0.14713885968307633;
       case 4:
-        return 0.3762355310363787;
+        return 0.02291740853634704;
       case 5:
-        return 0.637300472252502;
+        return -0.16683803070069378;
       case 6:
-        return 0.20202205506379087;
+        return -0.22215646275545436;
       case 7:
-        return 0.4480135488161109;
+        return 0.2827280582203656;
       case 8:
-        return 0.40041474503684094;
+        return -0.1938419175366401;
       case 9:
-        return 0.9019250757155337;
+        return -0.03949599188749488;
       case 10:
-        return -0.1751013560058243;
+        return 0.08050909453826517;
       default:
         return 0;
     }
@@ -117,7 +115,7 @@ class AvgAstModal extends React.Component {
         <Modal.Body>
           <Form>
             <Row className="mb-3">
-              <Form.Group as={Col} controlId="formGridEmail">
+              {/* <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>age</Form.Label>
                 <Form.Control
                   type="number"
@@ -125,7 +123,7 @@ class AvgAstModal extends React.Component {
                   // value={this.state.count}
                   onChange={(e) => this.setState({ age: e.target.value })}
                 />
-              </Form.Group>
+              </Form.Group> */}
 
               <Form.Group as={Col} controlId="formGridPassword">
                 <Form.Label>nextSeasonAge</Form.Label>
@@ -139,7 +137,7 @@ class AvgAstModal extends React.Component {
               </Form.Group>
             </Row>
 
-            <Row className="mb-3">
+            {/* <Row className="mb-3">
               <Form.Group as={Col} controlId="formGridAddress2">
                 <Form.Label>height</Form.Label>
                 <Form.Control
@@ -157,11 +155,11 @@ class AvgAstModal extends React.Component {
                   onChange={(e) => this.setState({ weight: e.target.value })}
                 />
               </Form.Group>
-            </Row>
+            </Row> */}
 
             <Row className="mb-3">
               <Form.Group as={Col} controlId="formGridAddress2">
-                <Form.Label>next season height</Form.Label>
+                <Form.Label>next season height (cm)</Form.Label>
                 <Form.Control
                   type="number"
                   placeholder="Enter Height next season"
@@ -172,7 +170,7 @@ class AvgAstModal extends React.Component {
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridAddress1">
-                <Form.Label>next season weight</Form.Label>
+                <Form.Label>next season weight (lb)</Form.Label>
                 <Form.Control
                   type="number"
                   placeholder="Enter weight next season"
@@ -194,7 +192,7 @@ class AvgAstModal extends React.Component {
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridAddress1">
-                <Form.Label>avg Ast</Form.Label>
+                <Form.Label>average assistance</Form.Label>
                 <Form.Control
                   type="number"
                   placeholder="Enter avg ast"

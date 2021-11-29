@@ -1,0 +1,2 @@
+PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
+203099,Jared Cunningham,0.45,1.4,0.1,0.55,0.55,0.65,0.05,0.7,0.75,0.1,0.15,0.0,0.3,0.45,1.55,-3.4,9.0,28.0,2.0,11.0,11.0,13.0,1.0,14.0,15.0,2.0,3.0,0.0,6.0,9.0,31.0,-68.0,20,310.3,6206.0

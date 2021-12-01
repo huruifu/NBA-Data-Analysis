@@ -9,6 +9,7 @@ import MainNavigation from "./components/mainNavigation/mainNavigation";
 // import pages
 import HomePage from "./pages/homePage/homePage";
 import AgeInjuryPlayerPage from "./pages/ageInjuryPlayerPage/ageInjuryPlayerPage";
+import SalaryPage from "./pages/salaryPage/salaryPage";
 
 class App extends React.Component {
   render() {
@@ -22,6 +23,9 @@ class App extends React.Component {
           </Route>
           <Route path="/injury-age">
             <AgeInjuryPlayerPage />
+          </Route>
+          <Route path="/salary">
+            <SalaryPage />
           </Route>
         </Switch>
         </div>

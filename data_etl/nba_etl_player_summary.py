@@ -1,3 +1,6 @@
+# use command to run:
+# ${SPARK_HOME}/bin/spark-submit data_etl/nba_etl_player_summary.py data/nba/games.csv data/nba/games_details.csv data/etl_player_summary_output data/etl_player_summary_output_noTeam
+
 import sys
 assert sys.version_info >= (3, 5) # make sure we have Python 3.5+
 
@@ -18,7 +21,7 @@ def to_sec(minute):
     return sec_result
 
 
-def main(games_path, gmDetail_path, output):
+def main(games_path, gmDetail_path, output1, output2):
     # main logic starts here
 
     # input should be a csv
@@ -44,18 +47,29 @@ def main(games_path, gmDetail_path, output):
                 sum('OREB'),sum('DREB'),sum('REB'),sum('AST'),sum('STL'),sum('BLK'),sum('TO'),sum('PF'),sum('PTS'),sum('PLUS_MINUS'),\
                 sum('ifminute'), avg('seconds'), sum('seconds'))
 
+    gamesAvg3 = gamesAvg.groupBy(functions.year('GAME_DATE').alias("year"), 'PLAYER_ID', 'PLAYER_NAME').agg(avg('FGM'), avg('FGA'), \
+                avg('FG3M'), avg('FG3A'), avg('FTM'), avg('FTA'), avg('OREB'), avg('DREB'), avg('REB'), avg('AST'), avg('STL'),avg('BLK'), \
+                avg('TO'), avg('PF'), avg('PTS'), avg('PLUS_MINUS'), sum('FGM'), sum('FGA'), sum('FG3M'), sum('FG3A'),sum('FTM'), sum('FTA'), \
+                sum('OREB'), sum('DREB'), sum('REB'), sum('AST'), sum('STL'), sum('BLK'), sum('TO'), sum('PF'), sum('PTS'),sum('PLUS_MINUS'), \
+                sum('ifminute'), avg('seconds'), sum('seconds'))
+
     gamesAvg2.write.partitionBy("year") \
         .mode("overwrite") \
         .option("header", "true").option("sep", ",") \
-        .csv(output)
+        .csv(output1)
 
+    gamesAvg3.write.partitionBy("year") \
+        .mode("overwrite") \
+        .option("header", "true").option("sep", ",") \
+        .csv(output2)
 
 if __name__ == '__main__':
     games_path = sys.argv[1]
     gmDetail_path = sys.argv[2]
-    output = sys.argv[3]
+    output1 = sys.argv[3]
+    output2 = sys.argv[4]
     spark = SparkSession.builder.appName('NBA ETL process').getOrCreate()
     assert spark.version >= '3.0'  # make sure we have Spark 3.0+
     spark.sparkContext.setLogLevel('WARN')
     sc = spark.sparkContext
-    main(games_path, gmDetail_path, output)
+    main(games_path, gmDetail_path, output1, output2)

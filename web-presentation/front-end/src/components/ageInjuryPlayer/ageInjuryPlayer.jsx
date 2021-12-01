@@ -74,7 +74,8 @@ class AgeInjuryPlayer extends Component {
         <Accordion.Item eventKey="0">
           <Accordion.Header>Top Players get injury</Accordion.Header>
           <Accordion.Body>
-            <Image src={this.state.playerMostInjuryImgPath} fluid />
+            {/* <Image src={this.state.playerMostInjuryImgPath} fluid /> */}
+            <img className="img-format" src={this.state.playerMostInjuryImgPath} />
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="1">
@@ -82,7 +83,8 @@ class AgeInjuryPlayer extends Component {
             Top Teams who have the highest injury events
           </Accordion.Header>
           <Accordion.Body>
-            <Image src={this.state.teamMostInjuryImgPath} fluid />
+            {/* <Image src={this.state.teamMostInjuryImgPath} fluid /> */}
+            <img className="img-format" src={this.state.teamMostInjuryImgPath} />
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="2">
@@ -92,7 +94,8 @@ class AgeInjuryPlayer extends Component {
               {this.state.injuryTypeImgs.map((imgObj) => (
                 <Col>
                   <Card>
-                    <Card.Img variant="top" src={imgObj.imgPath} />
+                    {/* <Card.Img variant="top" src={imgObj.imgPath} /> */}
+                    <img className="img-format" src={imgObj.imgPath} />
                     <Card.Body>
                       <Card.Title>{imgObj.description}</Card.Title>
                     </Card.Body>
@@ -105,7 +108,8 @@ class AgeInjuryPlayer extends Component {
         <Accordion.Item eventKey="3">
           <Accordion.Header>Feature Correlation</Accordion.Header>
           <Accordion.Body>
-          <Image src={this.state.correlationImgPath} fluid />
+          {/* <Image src={this.state.correlationImgPath} fluid /> */}
+          <img className="img-format" src={this.state.correlationImgPath} />
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="4">
@@ -125,8 +129,10 @@ class AgeInjuryPlayer extends Component {
             Predicting players' avg ast in next season
           </Accordion.Header>
           <Accordion.Body>
-          <Image src={this.state.avgAstCorrImgPath} fluid />
-          <Image src={this.state.avgAstModelImgPath} fluid />
+          {/* <Image src={this.state.avgAstCorrImgPath} fluid />
+          <Image src={this.state.avgAstModelImgPath} fluid /> */}
+          <img className="img-format" src={this.state.avgAstCorrImgPath} />
+          <img className="img-format" src={this.state.avgAstModelImgPath} />
             <Button variant="primary" onClick={this.handleAvgAstShow}>
               Launch demo
             </Button>

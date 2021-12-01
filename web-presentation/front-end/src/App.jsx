@@ -10,6 +10,7 @@ import MainNavigation from "./components/mainNavigation/mainNavigation";
 import HomePage from "./pages/homePage/homePage";
 import AgeInjuryPlayerPage from "./pages/ageInjuryPlayerPage/ageInjuryPlayerPage";
 import SalaryPage from "./pages/salaryPage/salaryPage";
+import TeamAbilitySummaryPage from "./pages/teamAbilitySummaryPage/teamAbilitySummaryPage";
 
 class App extends React.Component {
   render() {
@@ -20,6 +21,9 @@ class App extends React.Component {
         <Switch>
           <Route path="/" exact={true}>
             <HomePage />
+          </Route>
+          <Route path="/etl/team-ability">
+            <TeamAbilitySummaryPage />
           </Route>
           <Route path="/injury-age">
             <AgeInjuryPlayerPage />

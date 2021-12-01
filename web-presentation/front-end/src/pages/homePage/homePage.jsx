@@ -12,7 +12,8 @@ class HomePage extends Component {
   render() {
     return (
       <div className="container">
-        <Image className="background" src={this.state.backgroundImgPath} fluid/>
+        {/* <Image className="background" src={this.state.backgroundImgPath} fluid/> */}
+        <img className="background-image" src={this.state.backgroundImgPath} />
         {/* <div class="background-image"></div> */}
         <div class="centered">Centered</div>
       </div>

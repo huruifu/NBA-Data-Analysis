@@ -18,7 +18,7 @@ class MainNavigation extends Component {
           <NavDropdown.Item href="#action3">Player Stat Summary</NavDropdown.Item>
           <NavDropdown.Item href="#action4">Player Info Summary</NavDropdown.Item>
           <NavDropdown.Item href="#action5">Player Injury Summary</NavDropdown.Item>
-          <NavDropdown.Item href="#action6">Team Ability Summary</NavDropdown.Item>
+          <NavDropdown.Item href="/etl/team-ability">Team Ability Summary</NavDropdown.Item>
           <NavDropdown.Item href="#action7">Team Ranking Summary</NavDropdown.Item>
         </NavDropdown>
           <Nav.Link href="#">New Player Analytics</Nav.Link>

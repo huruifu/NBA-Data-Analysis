@@ -1,4 +1,0 @@
-PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
-101179,Ronnie Price,1.4375,4.34375,0.4375,1.375,0.6875,0.96875,0.5,0.78125,1.28125,1.4375,0.71875,0.125,1.34375,2.0,4.0,-1.7,46.0,139.0,14.0,44.0,22.0,31.0,16.0,25.0,41.0,46.0,23.0,4.0,43.0,64.0,128.0,-51.0,32,794.84375,25435.0
-202726,Andrew Goudelock,1.0,3.2,1.0,2.0,0.0,0.0,0.4,0.8,1.2,0.8,0.0,0.0,0.4,1.2,3.0,0.75,5.0,16.0,5.0,10.0,0.0,0.0,2.0,4.0,6.0,4.0,0.0,0.0,2.0,6.0,15.0,3.0,5,280.2,1401.0
-200894,Isma'il Muhammad,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,0.0,0.0,1.0,3.0,0.0,"",0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,0.0,0.0,1.0,3.0,0.0,"",1,12.0,12.0

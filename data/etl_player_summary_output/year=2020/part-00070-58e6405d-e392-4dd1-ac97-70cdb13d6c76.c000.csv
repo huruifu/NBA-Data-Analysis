@@ -1,2 +1,0 @@
-TEAM_ID,PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
-1610612744,201939,Stephen Curry,8.0,19.6,3.7,11.4,5.6,5.7,0.6,3.2,3.8,6.1,1.8,0.5,3.3,1.5,25.3,-5.9,80.0,196.0,37.0,114.0,56.0,57.0,6.0,32.0,38.0,61.0,18.0,5.0,33.0,15.0,253.0,-59.0,10,1817.0,18170.0

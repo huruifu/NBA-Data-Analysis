@@ -1,0 +1,2 @@
+PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
+1628436,Luke Kornet,2.375,5.475,0.925,3.175,0.55,0.75,0.625,1.725,2.35,1.025,0.3,0.675,0.425,1.55,6.225,-0.55,95.0,219.0,37.0,127.0,22.0,30.0,25.0,69.0,94.0,41.0,12.0,27.0,17.0,62.0,249.0,-22.0,40,942.9,37716.0

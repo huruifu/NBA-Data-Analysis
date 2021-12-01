@@ -1,0 +1,2 @@
+PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
+202408,Marcus Cousin,1.25,2.75,0.0,0.0,0.75,1.0,0.875,1.875,2.75,0.25,0.25,0.75,0.5,1.125,3.25,-4.25,10.0,22.0,0.0,0.0,6.0,8.0,7.0,15.0,22.0,2.0,2.0,6.0,4.0,9.0,26.0,-17.0,8,146.625,1173.0

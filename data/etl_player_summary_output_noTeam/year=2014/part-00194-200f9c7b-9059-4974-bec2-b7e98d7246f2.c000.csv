@@ -1,0 +1,2 @@
+PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
+202345,Damion James,2.2,3.6,0.2,0.2,0.8,1.6,1.0,1.6,2.6,1.0,1.0,0.4,0.6,2.6,5.4,8.2,11.0,18.0,1.0,1.0,4.0,8.0,5.0,8.0,13.0,5.0,5.0,2.0,3.0,13.0,27.0,41.0,5,766.0,3830.0

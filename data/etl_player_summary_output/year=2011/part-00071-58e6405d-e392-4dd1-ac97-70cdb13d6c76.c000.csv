@@ -1,2 +1,0 @@
-TEAM_ID,PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
-1610612749,2072,Michael Redd,1.8,4.5,0.4,1.7,0.4,0.4,0.0,0.8,0.8,1.2,0.2,0.1,0.4,0.4,4.4,1.0,18.0,45.0,4.0,17.0,4.0,4.0,0.0,8.0,8.0,12.0,2.0,1.0,4.0,4.0,44.0,10.0,10,805.9,8059.0

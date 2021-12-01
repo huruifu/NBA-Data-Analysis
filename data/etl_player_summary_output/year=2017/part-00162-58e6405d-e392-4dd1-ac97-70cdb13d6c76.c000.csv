@@ -1,2 +1,0 @@
-TEAM_ID,PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
-1610612740,101127,Jarrett Jack,1.0,1.5,0.0,0.5,1.0,1.0,0.0,0.0,0.0,2.5,1.0,0.0,1.5,2.0,3.0,-3.0,2.0,3.0,0.0,1.0,2.0,2.0,0.0,0.0,0.0,5.0,2.0,0.0,3.0,4.0,6.0,-6.0,2,992.5,1985.0

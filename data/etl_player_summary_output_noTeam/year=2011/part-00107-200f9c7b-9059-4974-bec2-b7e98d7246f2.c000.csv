@@ -1,0 +1,2 @@
+PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
+200761,Shawne Williams,1.68,5.88,0.84,3.48,0.32,0.44,0.8,1.92,2.72,0.64,0.4,0.44,0.52,1.76,4.52,-2.8,42.0,147.0,21.0,87.0,8.0,11.0,20.0,48.0,68.0,16.0,10.0,11.0,13.0,44.0,113.0,-70.0,25,1234.12,30853.0

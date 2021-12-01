@@ -1,5 +1,5 @@
 # use command to run:
-# ${SPARK_HOME}/bin/spark-submit data_etl/nba_etl_player_summary.py data/nba/games.csv data/nba/games_details.csv data/etl_player_summary_output data/etl_player_summary_output_noTeam
+# ${SPARK_HOME}/bin/spark-submit data_analytics/nba_salary_analysis.py data/clean_data/salary_etl
 
 import sys
 assert sys.version_info >= (3, 5) # make sure we have Python 3.5+
@@ -31,27 +31,30 @@ def main(games_path, gmDetail_path, output1, output2):
     #gmDetail_path = "/Users/sarahhu/Desktop/SFUgrad/CMPT732/732Project/Project/732-project/data/nba/games_details.csv"
     gmDetail = spark.read.option("delimiter", ",").option("header", "true").csv(gmDetail_path)
 
-    games2 = games.withColumn('GAME_DATE',functions.to_date(games["GAME_DATE_EST"]))
-    games2 = games2.filter((games2['GAME_DATE']>="2010-01-01") & (games2['GAME_DATE']<"2021-01-01"))
+    #games2 = games.withColumn('GAME_DATE',functions.to_date(games["GAME_DATE_EST"]))
+    #games2 = games2.filter((games2['GAME_DATE']>="2010-01-01") & (games2['GAME_DATE']<"2021-01-01"))
+    games2 = games.filter((games['SEASON'] >= "2010") & (games['SEASON'] < "2021"))
 
     gmDetail = gmDetail.withColumn("ifminute", when(gmDetail["MIN"].isNull(), 0).otherwise(1))
-    gamesDate = games2.groupBy('GAME_DATE', 'GAME_ID').count()
+    gamesDate = games2.groupBy('SEASON', 'GAME_ID').count()
     #gmDetail2 = gmDetail.drop('FG_PCT', 'FG3_PCT', 'FT_PCT')
     gamesAvg = gamesDate.join(gmDetail,['GAME_ID'],'inner')
 
     gamesAvg = gamesAvg.withColumn("seconds", to_sec(gamesAvg['MIN']))
 
-    gamesAvg2 = gamesAvg.groupBy(functions.year('GAME_DATE').alias("year"),'TEAM_ID','PLAYER_ID', 'PLAYER_NAME').agg(avg('FGM'),avg('FGA'),\
+    gamesAvg2 = gamesAvg.groupBy('SEASON','TEAM_ID','PLAYER_ID', 'PLAYER_NAME').agg(avg('FGM'),avg('FGA'),\
                 avg('FG3M'),avg('FG3A'),avg('FTM'),avg('FTA'),avg('OREB'),avg('DREB'),avg('REB'),avg('AST'),avg('STL'),avg('BLK'),\
                 avg('TO'),avg('PF'),avg('PTS'),avg('PLUS_MINUS'),sum('FGM'),sum('FGA'),sum('FG3M'),sum('FG3A'),sum('FTM'),sum('FTA'),\
                 sum('OREB'),sum('DREB'),sum('REB'),sum('AST'),sum('STL'),sum('BLK'),sum('TO'),sum('PF'),sum('PTS'),sum('PLUS_MINUS'),\
                 sum('ifminute'), avg('seconds'), sum('seconds'))
+    gamesAvg2 = gamesAvg2.withColumnRenamed("SEASON", "year")
 
-    gamesAvg3 = gamesAvg.groupBy(functions.year('GAME_DATE').alias("year"), 'PLAYER_ID', 'PLAYER_NAME').agg(avg('FGM'), avg('FGA'), \
+    gamesAvg3 = gamesAvg.groupBy('SEASON', 'PLAYER_ID', 'PLAYER_NAME').agg(avg('FGM'), avg('FGA'), \
                 avg('FG3M'), avg('FG3A'), avg('FTM'), avg('FTA'), avg('OREB'), avg('DREB'), avg('REB'), avg('AST'), avg('STL'),avg('BLK'), \
                 avg('TO'), avg('PF'), avg('PTS'), avg('PLUS_MINUS'), sum('FGM'), sum('FGA'), sum('FG3M'), sum('FG3A'),sum('FTM'), sum('FTA'), \
                 sum('OREB'), sum('DREB'), sum('REB'), sum('AST'), sum('STL'), sum('BLK'), sum('TO'), sum('PF'), sum('PTS'),sum('PLUS_MINUS'), \
                 sum('ifminute'), avg('seconds'), sum('seconds'))
+    gamesAvg3 = gamesAvg3.withColumnRenamed("SEASON", "year")
 
     gamesAvg2.write.partitionBy("year") \
         .mode("overwrite") \

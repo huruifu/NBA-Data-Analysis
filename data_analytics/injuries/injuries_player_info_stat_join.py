@@ -19,23 +19,26 @@ def main():
         types.StructField('Team', types.StringType()),
         types.StructField('Relinquished', types.StringType()),
         types.StructField('injury_name', types.StringType()),
-        types.StructField('status', types.StringType())
+        types.StructField('status', types.StringType()),
+        types.StructField('year', types.IntegerType()),
+        types.StructField('month', types.IntegerType()),
+        types.StructField('played_season', types.IntegerType())
     ])
     injuries = (spark.read.format("csv")
                 .option("header", "true")
                 .schema(injuries_schema)
                 .load(injuries_inputs)
-                .where((functions.col("injury_name") != "placed on IL") & (functions.col("injury_name") != "fined $50,000 by NBA for using inappropriate language during game"))
-                .withColumn("status",
-                            functions.when(functions.col("status").isNull(), "do not rest").otherwise(functions.col("status")))
-                .withColumn("year", functions.year(functions.col("Date")))
-                .withColumn("month", functions.month(functions.col("Date")))
-                # 2019 season is a special season
-                .withColumn("played_season",
-                            functions.when(functions.col("year")
-                                           == 2020, functions.col("year") - 1)
-                            .when(functions.col("month") >= 10, functions.col("year"))
-                            .otherwise(functions.col("year") - 1))
+                # .where((functions.col("injury_name") != "placed on IL") & (functions.col("injury_name") != "fined $50,000 by NBA for using inappropriate language during game"))
+                # .withColumn("status",
+                #             functions.when(functions.col("status").isNull(), "do not rest").otherwise(functions.col("status")))
+                # .withColumn("year", functions.year(functions.col("Date")))
+                # .withColumn("month", functions.month(functions.col("Date")))
+                # # 2019 season is a special season
+                # .withColumn("played_season",
+                #             functions.when(functions.col("year")
+                #                            == 2020, functions.col("year") - 1)
+                #             .when(functions.col("month") >= 10, functions.col("year"))
+                #             .otherwise(functions.col("year") - 1))
                 .drop("year")
                 .drop("month")
                 .orderBy("Relinquished", "Date"))
@@ -148,7 +151,7 @@ if __name__ == '__main__':
     player_stat_summary_inputs = sys.argv[2]
     player_info_inputs = sys.argv[3]
     outputs = sys.argv[4]
-    spark = SparkSession.builder.appName('example code').getOrCreate()
+    spark = SparkSession.builder.appName('join injury and player data for training model').getOrCreate()
     assert spark.version >= '3.0'  # make sure we have Spark 3.0+
     spark.sparkContext.setLogLevel('WARN')
     sc = spark.sparkContext

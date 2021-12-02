@@ -1,8 +1,26 @@
-import sys
-assert sys.version_info >= (3, 5) # make sure we have Python 3.5+
 from pyspark.sql import SparkSession, functions, types
+import sys
+assert sys.version_info >= (3, 5)  # make sure we have Python 3.5+
 
 # add more functions as necessary
+
+
+@functions.udf(returnType=types.StringType())
+def format_injury_name(injury_name):
+    if "placed on IL with" in injury_name:
+        injury_name = injury_name.replace("placed on IL with", "")
+    elif "placed on IL for" in injury_name:
+        injury_name = injury_name.replace("placed on IL for", "")
+    elif "placed on IL recovering from" in injury_name:
+        injury_name = injury_name.replace("placed on IL recovering from", "")
+    elif "placed on IL recoverimg from" in injury_name:
+        injury_name = injury_name.replace("placed on IL recoverimg from", "")
+    elif "placed on IL frecovering from" in injury_name:
+        injury_name = injury_name.replace("placed on IL frecovering from", "")
+    elif injury_name is None:
+        return None
+    return injury_name.strip()
+
 
 def main(inputs, outputs):
     # main logic starts here
@@ -46,16 +64,29 @@ def main(inputs, outputs):
                     .withColumn("injury_name", functions.regexp_replace(functions.col("Notes"), r'\((.*?)\)', ""))
                     .withColumn("status", functions.regexp_extract(functions.col("Notes"), r'\((.*?)\)', 1))
                     .drop(functions.col("Acquired"))
-                    .drop(functions.col("Notes")))
+                    .drop(functions.col("Notes"))
+                    .where((functions.col("injury_name") != "placed on IL") & (functions.col("injury_name") != "fined $50,000 by NBA for using inappropriate language during game"))
+                    .withColumn("injury_name", format_injury_name(functions.col("injury_name")))
+                    .withColumn("year", functions.year(functions.col("Date")))
+                    .withColumn("month", functions.month(functions.col("Date")))
+                    # 2019 season is a special season
+                    .withColumn("played_season",
+                                functions.when(functions.col("year")
+                                               == 2020, functions.col("year") - 1)
+                                .when(functions.col("month") >= 10, functions.col("year"))
+                                .otherwise(functions.col("year") - 1)))
+
     relinquished.cache()
     relinquished.show()
-    relinquished.coalesce(1).write.option("header", "true").csv(outputs, mode='overwrite')
+    relinquished.coalesce(1).write.option(
+        "header", "true").csv(outputs, mode='overwrite')
+
 
 if __name__ == '__main__':
     inputs = sys.argv[1]
     outputs = sys.argv[2]
-    spark = SparkSession.builder.appName('example code').getOrCreate()
-    assert spark.version >= '3.0' # make sure we have Spark 3.0+
+    spark = SparkSession.builder.appName('get clean injury data').getOrCreate()
+    assert spark.version >= '3.0'  # make sure we have Spark 3.0+
     spark.sparkContext.setLogLevel('WARN')
     sc = spark.sparkContext
     main(inputs, outputs)

@@ -11,6 +11,11 @@ import HomePage from "./pages/homePage/homePage";
 import AgeInjuryPlayerPage from "./pages/ageInjuryPlayerPage/ageInjuryPlayerPage";
 import SalaryPage from "./pages/salaryPage/salaryPage";
 import TeamAbilitySummaryPage from "./pages/teamAbilitySummaryPage/teamAbilitySummaryPage";
+import TeamRankingSummaryPage from "./pages/teamRankingSummaryPage/teamRankingSummaryPage";
+import PlayerSalarySummary from "./pages/playerSalarySummaryPage/playerSalarySummaryPage";
+import PlayerInjurySummaryPage from "./pages/playerInjurySummaryPage/playerInjurySummaryPage";
+import PlayerStatSummaryPage from "./pages/playerStatSummaryPage/playerStatSummaryPage";
+import PlayerInfoSummaryPage from "./pages/playerInfoSummaryPage/playerInfoSummaryPage";
 
 class App extends React.Component {
   render() {
@@ -24,6 +29,21 @@ class App extends React.Component {
           </Route>
           <Route path="/etl/team-ability">
             <TeamAbilitySummaryPage />
+          </Route>
+          <Route path="/etl/team-ranking">
+            <TeamRankingSummaryPage />
+          </Route>
+          <Route path="/etl/salary">
+            <PlayerSalarySummary />
+          </Route>
+          <Route path="/etl/injury">
+            <PlayerInjurySummaryPage />
+          </Route>
+          <Route path="/etl/player-stat-summary">
+            <PlayerStatSummaryPage />
+          </Route>
+          <Route path="/etl/player-info-summary">
+            <PlayerInfoSummaryPage />
           </Route>
           <Route path="/injury-age">
             <AgeInjuryPlayerPage />

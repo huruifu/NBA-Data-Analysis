@@ -15,11 +15,12 @@ class AgeInjuryPlayer extends Component {
     avgAstShow: false,
     playerMostInjuryImgPath: "/images/player_most_injury.png",
     teamMostInjuryImgPath: "/images/team_most_injury.png",
-    codeSnippetPath: "/images/code_snippet.png",
-    avgPtsModelImgPath: "/images/trueVsActualAvgPts.png",
-    avgAstModelImgPath: "/images/PredVsActualAvgAst.png",
     correlationImgPath: "/images/correlation.png",
     avgAstCorrImgPath: "/images/avgAstCorr.png",
+    corrImgs: [
+      {imgPath: "/images/correlation.png", description: "feature correlation"},
+      {imgPath: "/images/avgAstCorr.png", description: "feature selection"},
+    ],
     injuryTypeImgs: [
       {
         imgPath: "/images/c_injury_type.png",
@@ -50,6 +51,48 @@ class AgeInjuryPlayer extends Component {
         description: "injury type in position SG",
       },
     ],
+    scoreImgs: [
+      {imgPath: "/images/ageScore.png", description: "age and avg score scatter plot"},
+      {imgPath: "/images/countScore.png", description: "number of injury and avg score scatter plot"},
+      {imgPath: "/images/heightScore.png", description: "height and avg score scatter plot"},
+      {imgPath: "/images/weightScore.png", description: "weight and avg score scatter plot"},
+      {imgPath: "/images/trueVsActualAvgPts.png", description: "validation prediction plot"}
+    ],
+    assistImgs: [
+      {imgPath: "/images/ageAssist.png", description: "age and avg assist scatter plot"},
+      {imgPath: "/images/countAssist.png", description: "number of injury and avg assist scatter plot"},
+      {imgPath: "/images/heightAssist.png", description: "height and avg assist scatter plot"},
+      {imgPath: "/images/weightAssist.png", description: "weight and avg assist scatter plot"},
+      {imgPath: "/images/PredVsActualAvgAst.png", description: "validation prediction plot"}
+    ],
+    stlImgs: [
+      {imgPath: "/images/ageSteal.png", description: "age and avg steal scatter plot"},
+      {imgPath: "/images/countSteal.png", description: "number of injury and avg steal scatter plot"},
+      {imgPath: "/images/heightSteal.png", description: "height and avg steal scatter plot"},
+      {imgPath: "/images/weightSteal.png", description: "weight and avg steal scatter plot"},
+      {imgPath: "/images/trueVsActualSteal.png", description: "validation prediction plot"}
+    ],
+    blkImgs: [
+      {imgPath: "/images/ageBlk.png", description: "age and avg block scatter plot"},
+      {imgPath: "/images/countBlk.png", description: "number of injury and avg block scatter plot"},
+      {imgPath: "/images/heightBlk.png", description: "height and avg block scatter plot"},
+      {imgPath: "/images/weightBlk.png", description: "weight and avg block scatter plot"},
+      {imgPath: "/images/trueVsActualBlk.png", description: "validation prediction plot"},
+    ],
+    drebImgs: [
+      {imgPath: "/images/ageDreb.png", description: "age and avg defensive rebound scatter plot"},
+      {imgPath: "/images/countDreb.png", description: "number of injury and avg defensive rebound scatter plot"},
+      {imgPath: "/images/heightDreb.png", description: "height and avg defensive rebound scatter plot"},
+      {imgPath: "/images/weightDreb.png", description: "weight and avg defensive rebound scatter plot"},
+      {imgPath: "/images/trueVsActualDreb.png", description: "validation prediction plot"},
+    ],
+    orebImgs: [
+      {imgPath: "/images/ageOreb.png", description: "age and avg offensive rebound scatter plot"},
+      {imgPath: "/images/countOreb.png", description: "number of injury and avg offensive rebound scatter plot"},
+      {imgPath: "/images/heightOreb.png", description: "height and avg offensive rebound scatter plot"},
+      {imgPath: "/images/weightOreb.png", description: "weight and avg offensive rebound scatter plot"},
+      {imgPath: "/images/trueVsActualOreb.png", description: "validation prediction plot"},
+    ]
   };
 
   handleAvgPtsShow = () => {
@@ -108,16 +151,40 @@ class AgeInjuryPlayer extends Component {
         <Accordion.Item eventKey="3">
           <Accordion.Header>Feature Correlation</Accordion.Header>
           <Accordion.Body>
-          {/* <Image src={this.state.correlationImgPath} fluid /> */}
-          <img className="img-format" src={this.state.correlationImgPath} />
+          <Row xs={1} md={2} className="g-4">
+              {this.state.corrImgs.map((imgObj) => (
+                <Col>
+                  <Card>
+                    {/* <Card.Img variant="top" src={imgObj.imgPath} /> */}
+                    <img className="img-format" src={imgObj.imgPath} />
+                    <Card.Body>
+                      <Card.Title>{imgObj.description}</Card.Title>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="4">
           <Accordion.Header>
-            Predicting players' avg stat in next season
+            Predicting players' avg score in next season
           </Accordion.Header>
           <Accordion.Body>
-          <Image src={this.state.avgPtsModelImgPath} fluid />
+          {/* <Image src={this.state.avgPtsModelImgPath} fluid /> */}
+          <Row xs={1} md={2} className="g-4">
+              {this.state.scoreImgs.map((imgObj) => (
+                <Col>
+                  <Card>
+                    {/* <Card.Img variant="top" src={imgObj.imgPath} /> */}
+                    <img className="img-format" src={imgObj.imgPath} />
+                    <Card.Body>
+                      <Card.Title>{imgObj.description}</Card.Title>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
             <Button variant="primary" onClick={this.handleAvgPtsShow}>
               Launch demo
             </Button>
@@ -131,12 +198,105 @@ class AgeInjuryPlayer extends Component {
           <Accordion.Body>
           {/* <Image src={this.state.avgAstCorrImgPath} fluid />
           <Image src={this.state.avgAstModelImgPath} fluid /> */}
-          <img className="img-format" src={this.state.avgAstCorrImgPath} />
-          <img className="img-format" src={this.state.avgAstModelImgPath} />
+          {/* <img className="img-format" src={this.state.avgAstCorrImgPath} />
+          <img className="img-format" src={this.state.avgAstModelImgPath} /> */}
+          <Row xs={1} md={2} className="g-4">
+              {this.state.assistImgs.map((imgObj) => (
+                <Col>
+                  <Card>
+                    {/* <Card.Img variant="top" src={imgObj.imgPath} /> */}
+                    <img className="img-format" src={imgObj.imgPath} />
+                    <Card.Body>
+                      <Card.Title>{imgObj.description}</Card.Title>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+               </Row>
             <Button variant="primary" onClick={this.handleAvgAstShow}>
               Launch demo
             </Button>
             <AvgAstModal value={this.state.avgAstShow} onHandleClose={this.handleAvgAstClose}/>
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="6">
+          <Accordion.Header>
+            Predicting players' avg stl in next season
+          </Accordion.Header>
+          <Accordion.Body>
+          <Row xs={1} md={2} className="g-4">
+              {this.state.stlImgs.map((imgObj) => (
+                <Col>
+                  <Card>
+                    {/* <Card.Img variant="top" src={imgObj.imgPath} /> */}
+                    <img className="img-format" src={imgObj.imgPath} />
+                    <Card.Body>
+                      <Card.Title>{imgObj.description}</Card.Title>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="7">
+          <Accordion.Header>
+            Predicting players' avg block in next season
+          </Accordion.Header>
+          <Accordion.Body>
+          <Row xs={1} md={2} className="g-4">
+              {this.state.blkImgs.map((imgObj) => (
+                <Col>
+                  <Card>
+                    {/* <Card.Img variant="top" src={imgObj.imgPath} /> */}
+                    <img className="img-format" src={imgObj.imgPath} />
+                    <Card.Body>
+                      <Card.Title>{imgObj.description}</Card.Title>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="8">
+          <Accordion.Header>
+            Predicting players' defensive rebound in next season
+          </Accordion.Header>
+          <Accordion.Body>
+          <Row xs={1} md={2} className="g-4">
+              {this.state.drebImgs.map((imgObj) => (
+                <Col>
+                  <Card>
+                    {/* <Card.Img variant="top" src={imgObj.imgPath} /> */}
+                    <img className="img-format" src={imgObj.imgPath} />
+                    <Card.Body>
+                      <Card.Title>{imgObj.description}</Card.Title>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="9">
+          <Accordion.Header>
+            Predicting players' offensive rebound in next season
+          </Accordion.Header>
+          <Accordion.Body>
+          <Row xs={1} md={2} className="g-4">
+              {this.state.orebImgs.map((imgObj) => (
+                <Col>
+                  <Card>
+                    {/* <Card.Img variant="top" src={imgObj.imgPath} /> */}
+                    <img className="img-format" src={imgObj.imgPath} />
+                    <Card.Body>
+                      <Card.Title>{imgObj.description}</Card.Title>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>

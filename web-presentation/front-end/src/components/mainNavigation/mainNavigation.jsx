@@ -15,11 +15,12 @@ class MainNavigation extends Component {
           <Nav.Link href="/">Home</Nav.Link>
           {/* <Nav.Link href="/injury-age">ETL</Nav.Link> */}
           <NavDropdown title="ETL" id="navbarScrollingDropdown">
-          <NavDropdown.Item href="#action3">Player Stat Summary</NavDropdown.Item>
-          <NavDropdown.Item href="#action4">Player Info Summary</NavDropdown.Item>
-          <NavDropdown.Item href="#action5">Player Injury Summary</NavDropdown.Item>
+          <NavDropdown.Item href="/etl/player-stat-summary">Player Stat Summary</NavDropdown.Item>
+          <NavDropdown.Item href="/etl/player-info-summary">Player Info Summary</NavDropdown.Item>
+          <NavDropdown.Item href="/etl/injury">Player Injury Summary</NavDropdown.Item>
+          <NavDropdown.Item href="/etl/salary">Player Salary Summary</NavDropdown.Item>
           <NavDropdown.Item href="/etl/team-ability">Team Ability Summary</NavDropdown.Item>
-          <NavDropdown.Item href="#action7">Team Ranking Summary</NavDropdown.Item>
+          <NavDropdown.Item href="/etl/team-ranking">Team Ranking Summary</NavDropdown.Item>
         </NavDropdown>
           <Nav.Link href="#">New Player Analytics</Nav.Link>
           <Nav.Link href="#">MVP & All NBA Team</Nav.Link>

@@ -1,3 +1,0 @@
-PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
-101106,Andrew Bogut,0.78125,1.34375,0.0,0.0,0.0625,0.0625,1.09375,2.4375,3.53125,0.75,0.21875,0.65625,0.875,2.03125,1.625,-1.65625,25.0,43.0,0.0,0.0,2.0,2.0,35.0,78.0,113.0,24.0,7.0,21.0,28.0,65.0,52.0,-53.0,32,673.78125,21561.0
-203920,Khem Birch,0.7,1.3,0.0,0.0,0.2,0.2,0.8,1.0,1.8,0.2,0.2,0.9,0.3,1.1,1.6,0.0,7.0,13.0,0.0,0.0,2.0,2.0,8.0,10.0,18.0,2.0,2.0,9.0,3.0,11.0,16.0,0.0,10,318.2,3182.0

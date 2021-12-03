@@ -1,3 +1,0 @@
-PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
-1628403,Caleb Swanigan,1.35,3.7,0.1,0.5,0.7,1.15,1.2,2.35,3.55,0.6,0.35,0.15,1.25,1.8,3.5,-0.55,27.0,74.0,2.0,10.0,14.0,23.0,24.0,47.0,71.0,12.0,7.0,3.0,25.0,36.0,70.0,-11.0,20,629.55,12591.0
-203580,Larry Drew II,0.0,2.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,1.0,1.0,0.0,0.0,0.0,0.0,-2.0,0.0,2.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,1.0,1.0,0.0,0.0,0.0,0.0,-2.0,1,300.0,300.0

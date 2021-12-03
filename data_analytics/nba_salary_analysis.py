@@ -15,7 +15,7 @@ from pyspark.ml.feature import StringIndexer, VectorAssembler, SQLTransformer
 from pyspark.ml.regression import GBTRegressor, RandomForestRegressor, DecisionTreeRegressor, GeneralizedLinearRegression, LinearRegression
 from pyspark.ml.evaluation import RegressionEvaluator
 from pyspark.ml import Pipeline
-from pyspark.ml.feature import StringIndexer, OneHotEncoder
+from pyspark.ml.feature import StringIndexer, OneHotEncoder, MinMaxScaler, PCA
 
 import numpy as np
 import pandas as pd
@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 import pip
 pip.main(['install','seaborn'])
 import seaborn as sns
-
+from IPython.display import display
 
 salary_schema = types.StructType([
     types.StructField('PLAYER_NAME', types.StringType()),
@@ -89,7 +89,7 @@ def main(salary_path):
     # main logic starts here
     #salary_path = "/Users/sarahhu/Desktop/SFUgrad/CMPT732/732Project/732-project/data/clean_data/salary_etl"
     salary = spark.read.option("delimiter", ",").option("header", "true").csv(salary_path, schema=salary_schema)
-    salary = salary.drop('PLAYER_ID')
+    salary = salary.drop('PLAYER_ID','PLAYER_NAME')
     salary = salary.na.fill(value=0)
 
     salary_df = salary.toPandas()
@@ -115,19 +115,20 @@ def main(salary_path):
     train = train.cache()
     validation = validation.cache()
 
-    assembler = VectorAssembler(
-    inputCols=['season', 'avg(FGM)', 'avg(FGA)', 'avg(FG3M)', 'avg(FG3A)', 'avg(FTM)', 'avg(FTA)', 'avg(OREB)',\
+    assembler = VectorAssembler(inputCols=['season', 'avg(FGM)', 'avg(FGA)', 'avg(FG3M)', 'avg(FG3A)', 'avg(FTM)', 'avg(FTA)', 'avg(OREB)',\
                    'avg(DREB)', 'avg(REB)', 'avg(AST)', 'avg(STL)', 'avg(BLK)', 'avg(TO)', 'avg(PF)', 'avg(PTS)',\
                    'avg(PLUS_MINUS)', 'sum(FGM)', 'sum(FGA)', 'sum(FG3M)', 'sum(FG3A)', 'sum(FTM)', 'sum(FTA)',\
                    'sum(OREB)', 'sum(DREB)', 'sum(REB)', 'sum(AST)', 'sum(STL)', 'sum(BLK)', 'sum(TO)', 'sum(PF)',\
                    'sum(PTS)', 'sum(PLUS_MINUS)', 'sum(ifminute)', 'avg(seconds)', 'sum(seconds)', 'age',\
                    'player_height', 'player_weight', 'injuries'], outputCol='features')
-    indexer1 = StringIndexer(inputCol="PLAYER_NAME", outputCol="PLAYER_NAME_index", handleInvalid="keep")
+    scaler = MinMaxScaler(inputCol="features", outputCol="featuresN")
+    # pca = PCA(k=10, inputCol="featuresN", outputCol="featuresPCA")
+    # indexer1 = StringIndexer(inputCol="PLAYER_NAME", outputCol="PLAYER_NAME_index", handleInvalid="keep")
     # regressor = RandomForestRegressor(featuresCol='features', labelCol='salary', numTrees=3, maxDepth=5, seed=42)
     # regressor = GeneralizedLinearRegression(featuresCol="features", labelCol="salary", regParam=2, maxIter=5) #0.56
     # regressor = GBTRegressor(featuresCol='features', labelCol='salary') #0.52
-    regressor = RandomForestRegressor(featuresCol='features', labelCol='salary', numTrees=4, maxDepth=6, seed=42)  # 0.60
-    nba_pipeline = Pipeline(stages=[assembler, indexer1, regressor])
+    regressor = RandomForestRegressor(featuresCol='featuresN', labelCol='salary', numTrees=4, maxDepth=6, seed=42)  # 0.60
+    nba_pipeline = Pipeline(stages=[assembler, scaler, regressor])
     nba_model = nba_pipeline.fit(train)
     predictions = nba_model.transform(validation)
     r2_evaluator = RegressionEvaluator(predictionCol='prediction', labelCol='salary', metricName='r2')
@@ -136,8 +137,27 @@ def main(salary_path):
     rmse = rmse_evaluator.evaluate(predictions)
     print('Validation score (R*2) for salary model:', r2)
     print('Validation score (RMSE) for salary model:', rmse)
-
+    print('parameters:', nba_model.stages[-1])
     print('importance:', nba_model.stages[-1].featureImportances)
+
+    feature_list = []
+    for col in salary.columns:
+        if col == 'salary':
+            continue
+        else:
+            feature_list.append(col)
+    importances = nba_model.stages[-1].featureImportances
+    x_values = list(range(len(importances)))
+    plt.figure()
+    plt.bar(x_values, importances, orientation='vertical')
+    plt.xticks(x_values, feature_list, rotation=40)
+    plt.ylabel('Importance')
+    plt.xlabel('Feature')
+    plt.title('Feature Importances')
+    plt.savefig('web-presentation/front-end/public/salary_featureImportance.png')
+
+    #display(nba_model.stages[-1])
+    #plt.savefig(nba_model.stages[-1])
 
     plot_validation_result(predictions.select("prediction").collect(), predictions.select("salary").collect())
     plt.savefig('web-presentation/front-end/public/salary_predictions.png')

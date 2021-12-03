@@ -1,2 +1,0 @@
-PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
-1626159,Justise Winslow,5.14,11.98,1.24,3.72,1.32,2.14,1.02,4.68,5.7,4.74,0.94,0.28,2.3,2.92,12.84,1.38,257.0,599.0,62.0,186.0,66.0,107.0,51.0,234.0,285.0,237.0,47.0,14.0,115.0,146.0,642.0,69.0,50,1848.78,92439.0

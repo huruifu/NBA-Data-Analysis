@@ -1,3 +1,0 @@
-TEAM_ID,PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
-1610612754,201228,C.J. Watson,2.9,6.9,1.275,3.175,2.5,3.025,0.375,2.625,3.0,3.4,1.025,0.125,1.65,1.85,9.575,-1.325,116.0,276.0,51.0,127.0,100.0,121.0,15.0,105.0,120.0,136.0,41.0,5.0,66.0,74.0,383.0,-53.0,40,1463.25,58530.0
-1610612762,203968,Jerrelle Benimon,0.0,0.0,0.0,0.0,0.0,0.0,0.5,1.0,1.5,0.0,0.0,0.0,0.5,0.0,0.0,3.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,2.0,3.0,0.0,0.0,0.0,1.0,0.0,0.0,6.0,2,82.0,164.0

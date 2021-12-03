@@ -56,6 +56,14 @@ class AgeInjuryPlayer extends Component {
       {imgPath: "/images/countScore.png", description: "number of injury and avg score scatter plot"},
       {imgPath: "/images/heightScore.png", description: "height and avg score scatter plot"},
       {imgPath: "/images/weightScore.png", description: "weight and avg score scatter plot"},
+
+      {imgPath: "/images/countResidualScore.png", description: "injury residual plot"},
+      {imgPath: "/images/logCountResidualScore.png", description: "log injury residual plot"},
+      {imgPath: "/images/ageResidualScore.png", description: "age residual plot"},
+      {imgPath: "/images/heightResidualScore.png", description: "height residual plot"},
+      {imgPath: "/images/weightResidualScore.png", description: "weight residual plot"},
+      {imgPath: "/images/scoreResidualScore.png", description: "average score last season residual plot"},
+
       {imgPath: "/images/trueVsActualAvgPts.png", description: "validation prediction plot"}
     ],
     assistImgs: [
@@ -63,6 +71,14 @@ class AgeInjuryPlayer extends Component {
       {imgPath: "/images/countAssist.png", description: "number of injury and avg assist scatter plot"},
       {imgPath: "/images/heightAssist.png", description: "height and avg assist scatter plot"},
       {imgPath: "/images/weightAssist.png", description: "weight and avg assist scatter plot"},
+
+      {imgPath: "/images/countResidualAssist.png", description: "injury residual plot"},
+      {imgPath: "/images/logCountResidualAssist.png", description: "log injury residual plot"},
+      {imgPath: "/images/ageResidualAssist.png", description: "age residual plot"},
+      {imgPath: "/images/heightResidualAssist.png", description: "height residual plot"},
+      {imgPath: "/images/weightResidualAssist.png", description: "weight residual plot"},
+      {imgPath: "/images/assistResidualAssist.png", description: "average assist last season residual plot"},
+
       {imgPath: "/images/PredVsActualAvgAst.png", description: "validation prediction plot"}
     ],
     stlImgs: [
@@ -70,6 +86,14 @@ class AgeInjuryPlayer extends Component {
       {imgPath: "/images/countSteal.png", description: "number of injury and avg steal scatter plot"},
       {imgPath: "/images/heightSteal.png", description: "height and avg steal scatter plot"},
       {imgPath: "/images/weightSteal.png", description: "weight and avg steal scatter plot"},
+
+      {imgPath: "/images/countResidualSteal.png", description: "injury residual plot"},
+      {imgPath: "/images/logCountResidualSteal.png", description: "log injury residual plot"},
+      {imgPath: "/images/ageResidualSteal.png", description: "age residual plot"},
+      {imgPath: "/images/heightResidualSteal.png", description: "height residual plot"},
+      {imgPath: "/images/weightResidualSteal.png", description: "weight residual plot"},
+      {imgPath: "/images/stealResidualSteal.png", description: "average steal last season residual plot"},
+
       {imgPath: "/images/trueVsActualSteal.png", description: "validation prediction plot"}
     ],
     blkImgs: [
@@ -77,6 +101,14 @@ class AgeInjuryPlayer extends Component {
       {imgPath: "/images/countBlk.png", description: "number of injury and avg block scatter plot"},
       {imgPath: "/images/heightBlk.png", description: "height and avg block scatter plot"},
       {imgPath: "/images/weightBlk.png", description: "weight and avg block scatter plot"},
+
+      {imgPath: "/images/countResidualBlk.png", description: "injury residual plot"},
+      {imgPath: "/images/logCountResidualBlk.png", description: "log injury residual plot"},
+      {imgPath: "/images/ageResidualBlk.png", description: "age residual plot"},
+      {imgPath: "/images/heightResidualBlk.png", description: "height residual plot"},
+      {imgPath: "/images/weightResidualBlk.png", description: "weight residual plot"},
+      {imgPath: "/images/blkResidualBlk.png", description: "average block last season residual plot"},
+
       {imgPath: "/images/trueVsActualBlk.png", description: "validation prediction plot"},
     ],
     drebImgs: [
@@ -84,6 +116,14 @@ class AgeInjuryPlayer extends Component {
       {imgPath: "/images/countDreb.png", description: "number of injury and avg defensive rebound scatter plot"},
       {imgPath: "/images/heightDreb.png", description: "height and avg defensive rebound scatter plot"},
       {imgPath: "/images/weightDreb.png", description: "weight and avg defensive rebound scatter plot"},
+
+      {imgPath: "/images/countResidualDreb.png", description: "injury residual plot"},
+      {imgPath: "/images/logCountResidualDreb.png", description: "log injury residual plot"},
+      {imgPath: "/images/ageResidualDreb.png", description: "age residual plot"},
+      {imgPath: "/images/heightResidualDreb.png", description: "height residual plot"},
+      {imgPath: "/images/weightResidualDreb.png", description: "weight residual plot"},
+      {imgPath: "/images/drebResidualDreb.png", description: "average deffensive rebound last season residual plot"},
+
       {imgPath: "/images/trueVsActualDreb.png", description: "validation prediction plot"},
     ],
     orebImgs: [
@@ -91,6 +131,14 @@ class AgeInjuryPlayer extends Component {
       {imgPath: "/images/countOreb.png", description: "number of injury and avg offensive rebound scatter plot"},
       {imgPath: "/images/heightOreb.png", description: "height and avg offensive rebound scatter plot"},
       {imgPath: "/images/weightOreb.png", description: "weight and avg offensive rebound scatter plot"},
+
+      {imgPath: "/images/countResidualOreb.png", description: "injury residual plot"},
+      {imgPath: "/images/logCountResidualOreb.png", description: "log injury residual plot"},
+      {imgPath: "/images/ageResidualOreb.png", description: "age residual plot"},
+      {imgPath: "/images/heightResidualOreb.png", description: "height residual plot"},
+      {imgPath: "/images/weightResidualOreb.png", description: "weight residual plot"},
+      {imgPath: "/images/orebResidualOreb.png", description: "average offensive rebound last season residual plot"},
+
       {imgPath: "/images/trueVsActualOreb.png", description: "validation prediction plot"},
     ]
   };

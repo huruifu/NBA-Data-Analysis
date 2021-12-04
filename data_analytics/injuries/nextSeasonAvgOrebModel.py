@@ -5,7 +5,7 @@ from pyspark.ml.regression import GBTRegressor, RandomForestRegressor, LinearReg
 from pyspark.ml.tuning import ParamGridBuilder, CrossValidator
 from pyspark.ml.evaluation import RegressionEvaluator
 
-from plot_tools import plot_validation_result, plot_corr
+from plot_tools import plot_validation_result, plot_corr, plot_scatter, plot_residual, plot_featureImportance
 
 import re
 import sys
@@ -65,15 +65,13 @@ def main():
         inputCol="status", outputCol="status_index", stringOrderType="frequencyDesc",
         handleInvalid="skip")
     
-    position_encoder = OneHotEncoder(inputCol="player_position_index", outputCol="player_position_encoder")
-    status_encoder = OneHotEncoder(inputCol="status_index", outputCol="status_encoder")
+    # position_encoder = OneHotEncoder(inputCol="player_position_index", outputCol="player_position_encoder")
+    # status_encoder = OneHotEncoder(inputCol="status_index", outputCol="status_encoder")
     
     # predict next avg assistance
-    vectorAssembler = VectorAssembler(inputCols=["player_position_encoder", "status_encoder", "count",
+    vectorAssembler = VectorAssembler(inputCols=["player_position_index", "status_index", "count",
                                                 "avgOreb", "nextSeasonAge", "nextSeasonHeight", "nextSeasonWeight"],
                                       outputCol="features")
-    # rmse_evaluator = RegressionEvaluator(
-    #     predictionCol="prediction", labelCol="nextSeasonAvgAst", metricName="rmse")
     r2_evaluator = RegressionEvaluator(
         predictionCol="prediction", labelCol="nextSeasonAvgOreb", metricName="r2")
     sqlStatement = (
@@ -88,36 +86,40 @@ def main():
     AND t0.PLAYER_NAME = t1.PLAYER_NAME
     """)
     
-    lr = LinearRegression(featuresCol="features", labelCol="nextSeasonAvgOreb", maxIter=4)
+    # tree regressor
+    # gbtr = GBTRegressor(featuresCol="features", labelCol="nextSeasonAvgDreb", maxIter=8,
+    #                     maxDepth=5, stepSize=0.1, seed=42, featureSubsetStrategy='all')
+    # grid = (ParamGridBuilder()
+    #         .baseOn({gbtr.labelCol: 'nextSeasonAvgDreb'}) 
+    #         .baseOn([gbtr.featuresCol, "features"])
+    #         .baseOn([gbtr.predictionCol, 'prediction']) 
+    #         .build())
+    rfr = RandomForestRegressor(featuresCol="features", labelCol="nextSeasonAvgOreb",
+                        numTrees=5, maxDepth=5, seed=42)
     grid = (ParamGridBuilder()
-            .addGrid(lr.maxIter, [1, 4])
-            .addGrid(lr.regParam, [0.1, 0.01])
-            .addGrid(lr.elasticNetParam, [0.0, 1.0])
+            .baseOn({rfr.labelCol: 'nextSeasonAvgOreb'}) 
+            .baseOn([rfr.featuresCol, "features"])
+            .baseOn([rfr.predictionCol, 'prediction']) 
             .build())
-    cv = CrossValidator(estimator=lr, estimatorParamMaps=grid, evaluator=r2_evaluator, numFolds=10)
+    cv = CrossValidator(estimator=rfr, estimatorParamMaps=grid, evaluator=r2_evaluator, numFolds=10)
     pipelineCV = Pipeline(stages=[SQLTransformer(statement=sqlStatement), position_indexer, status_indexer,
-                                    position_encoder, status_encoder, vectorAssembler, cv])
-    lrModelCV = pipelineCV.fit(train)
-    trainDF = lrModelCV.transform(train)
-    trainDF.show()
+                                    vectorAssembler, cv])
+    rfrModelCV = pipelineCV.fit(train)
+    trainDF = rfrModelCV.transform(train)
     r2_train = r2_evaluator.evaluate(trainDF)
     print(f"r2 training for predicting nextSeasonAvgOreb is {r2_train}")
-    predDF = lrModelCV.transform(validation)
+    predDF = rfrModelCV.transform(validation)
     r2 = r2_evaluator.evaluate(predDF)
     print(f"r2 validation for predicting nextSeasonAvgOreb is {r2}")
-    lrCV = lrModelCV.stages[-1].bestModel
-    trainDF.groupBy("player_position", "player_position_encoder").agg(functions.count("*")).show()
-    trainDF.groupBy("status", "status_encoder").agg(functions.count("*")).show()
+    treeCV = rfrModelCV.stages[-1].bestModel
+    # trainDF.groupBy("player_position", "player_position_index").agg(functions.count("*")).show()
     # print(predDF.count())
-    print(predDF.count())
-    print(lrCV.coefficients)
-    print(lrCV.intercept)
-    plot_validation_result(predDF.select("prediction").collect(), predDF.select("nextSeasonAvgOreb").collect())    
-    
-    # plot_validation_result(predDF.select("prediction").collect(), predDF.select("nextSeasonAvgFgp").collect())  
-    # df = trainDF.select("age", "count", "height", "weight", "avgAst", "nextSeasonAge",
-    #                   "nextSeasonHeight", "nextSeasonWeight", "nextSeasonAvgAst").toPandas()
-    # plot_corr(df)
+    # print(treeCV.featureImportances.toArray())
+    plot_featureImportance(["player_position_index", "status_index", "count", "avgOreb", "nextSeasonAge",
+                            "nextSeasonHeight", "nextSeasonWeight"],
+                           treeCV.featureImportances.toArray())
+    plot_validation_result(predDF.select("prediction").collect(), predDF.select("nextSeasonAvgOreb").collect())
+    # print(treeCV.toDebugString)
     
 
 

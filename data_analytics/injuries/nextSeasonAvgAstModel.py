@@ -5,7 +5,7 @@ from pyspark.ml.regression import GBTRegressor, RandomForestRegressor, LinearReg
 from pyspark.ml.tuning import ParamGridBuilder, CrossValidator
 from pyspark.ml.evaluation import RegressionEvaluator
 
-from plot_tools import plot_validation_result, plot_corr
+from plot_tools import plot_validation_result, plot_corr, plot_scatter, plot_residual
 
 import re
 import sys
@@ -54,8 +54,8 @@ def main():
               .repartition(8))
 
     train, validation = player.randomSplit([0.6, 0.4])
-    print(train.count())
-    print(validation.count())
+    # print(train.count())
+    # print(validation.count())
     train = train.cache()
     validation = validation.cache()
     position_indexer = StringIndexer(
@@ -69,16 +69,15 @@ def main():
     status_encoder = OneHotEncoder(inputCol="status_index", outputCol="status_encoder")
     
     # predict next avg assistance
+    # lr vector
     vectorAssembler = VectorAssembler(inputCols=["player_position_encoder", "status_encoder", "count",
                                                 "avgAst", "nextSeasonAge", "nextSeasonHeight", "nextSeasonWeight"],
                                       outputCol="features")
-    # rmse_evaluator = RegressionEvaluator(
-    #     predictionCol="prediction", labelCol="nextSeasonAvgAst", metricName="rmse")
     r2_evaluator = RegressionEvaluator(
         predictionCol="prediction", labelCol="nextSeasonAvgAst", metricName="r2")
     sqlStatement = (
         """
-    SELECT t0.age, t0.status, t0.count, t0.player_height AS height, t0.player_weight AS weight,
+    SELECT t0.age, t0.status, LOG(t0.count) AS count, t0.player_height AS height, t0.player_weight AS weight,
     (t0.totalAst / t0.totalGames) AS avgAst, t1.player_position, t1.age AS nextSeasonAge,
     t1.player_height AS nextSeasonHeight, t1.player_weight AS nextSeasonWeight,
     (t1.totalAst / t1.totalGames) AS nextSeasonAvgAst
@@ -105,19 +104,49 @@ def main():
     predDF = lrModelCV.transform(validation)
     r2 = r2_evaluator.evaluate(predDF)
     print(f"r2 validation for predicting nextSeasonAvgAst is {r2}")
-    lrCV = lrModelCV.stages[-1].bestModel
-    trainDF.groupBy("player_position", "player_position_encoder").agg(functions.count("*")).show()
-    trainDF.groupBy("status", "status_encoder").agg(functions.count("*")).show()
-    # print(predDF.count())
-    print(predDF.count())
-    print(lrCV.coefficients)
-    print(lrCV.intercept)
-    plot_validation_result(predDF.select("prediction").collect(), predDF.select("nextSeasonAvgAst").collect())    
+    # lrCV = lrModelCV.stages[-1].bestModel
     
+    # # incoder variable
+    # trainDF.groupBy("player_position", "player_position_encoder").agg(functions.count("*")).show()
+    # trainDF.groupBy("status", "status_encoder").agg(functions.count("*")).show()
+    
+    # # model estimate
+    # print(predDF.count())
+    # # print(lrCV.coefficients)
+    # # print(lrCV.intercept)
+    
+    # # residual plot
+    # trainDF = (trainDF
+    #            .withColumn("residual", functions.col("nextSeasonAvgAst") - functions.col("prediction")))
+    
+    # plot_residual(trainDF.select("count").collect(), trainDF.select("residual").collect(), "injury", "residual")
+    # plot_residual(trainDF.select("age").collect(), trainDF.select("residual").collect(), "age", "residual")
+    # plot_residual(trainDF.select("height").collect(), trainDF.select("residual").collect(), "height", "residual")
+    # plot_residual(trainDF.select("weight").collect(), trainDF.select("residual").collect(), "weight", "residual")
+    # plot_residual(trainDF.select("avgAst").collect(), trainDF.select("residual").collect(), "avgAst", "residual")
+    
+    # scatter plot
+    # player = (player
+    #           .withColumn("avgAst", functions.col("totalAst")/functions.col("totalGames")))
+    # player.cache()
+    # plot_scatter(player.select("count").collect(), player.select("avgAst").collect(), "number of injuries",
+    #                        "average assist")
+    # plot_scatter(player.select("age").collect(), player.select("avgAst").collect(), "age",
+    #                        "average assist")
+    # plot_scatter(player.select("player_height").collect(), player.select("avgAst").collect(), "height",
+    #                        "average assist")
+    # plot_scatter(player.select("player_weight").collect(), player.select("avgAst").collect(), "weight",
+    #                        "average assist")
+    
+    # true vs predict plot
+    # plot_validation_result(predDF.select("prediction").collect(), predDF.select("nextSeasonAvgAst").collect())    
+    
+    # correlation plot
     # plot_validation_result(predDF.select("prediction").collect(), predDF.select("nextSeasonAvgFgp").collect())  
     # df = trainDF.select("age", "count", "height", "weight", "avgAst", "nextSeasonAge",
     #                   "nextSeasonHeight", "nextSeasonWeight", "nextSeasonAvgAst").toPandas()
     # plot_corr(df)
+    
     
 
 

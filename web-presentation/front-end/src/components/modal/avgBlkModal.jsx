@@ -7,13 +7,13 @@ import Alert from "react-bootstrap/Alert";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-class AvgAstModal extends Component {
+class AvgBlkModal extends Component {
   state = {
     // age: 0,
     count: 0,
     // height: 0,
     // weight: 0,
-    avgAst: 0,
+    avgBlk: 0,
     nextSeasonAge: 0,
     nextSeasonHeight: 0,
     nextSeasonWeight: 0,
@@ -22,15 +22,18 @@ class AvgAstModal extends Component {
   };
 
   predict = () => {
+    let count = this.state.count == 0 ? 0 : Math.log(this.state.count);
     let predictValue =
-      this.state.count * (-0.009854868617951875) +
-      this.state.avgAst * 0.8819662904757689 +
-      this.state.nextSeasonAge * (-0.03608371595506181) +
-      this.state.nextSeasonHeight * (-2.3131297988292498e-05) +
-      this.state.nextSeasonWeight * 0.0011553979373318322 +
+      count * 0.023993218929882824 +
+      this.state.avgBlk * 0.7588415706176887 +
+      this.state.nextSeasonAge * -0.006415970926103198 +
+      this.state.nextSeasonHeight * 0.006794471416815495 +
+      this.state.nextSeasonWeight * -0.006231412542481215 +
       this.getStatusWeight() +
-      this.getPositionWeight() + 
-      1.4367413155385134;
+      this.getPositionWeight() +
+      0.5747418631441689;
+    console.log(Math.log(this.state.count));
+    console.log(this.predictValue);
     return predictValue.toFixed(2);
   };
 
@@ -54,27 +57,27 @@ class AvgAstModal extends Component {
   getPositionWeight = () => {
     switch (this.state.player_position_index) {
       case 0:
-        return 0.24198585636978817;
+        return -0.02536238692655817;
       case 1:
-        return -0.057876978663253566;
+        return -0.034870316974489585;
       case 2:
-        return -0.09194479089534115;
+        return 0.06221969389186299;
       case 3:
-        return -0.14713885968307633;
+        return 0.15345804585271594;
       case 4:
-        return 0.02291740853634704;
+        return -0.008013657375416657;
       case 5:
-        return -0.16683803070069378;
+        return -0.10671520106133327;
       case 6:
-        return -0.22215646275545436;
+        return 0.14200976091902878;
       case 7:
-        return 0.2827280582203656;
+        return 0.026629930653102183;
       case 8:
-        return -0.1938419175366401;
+        return 0.026629930653102183;
       case 9:
-        return -0.03949599188749488;
+        return 0;
       case 10:
-        return 0.08050909453826517;
+        return 0;
       default:
         return 0;
     }
@@ -95,8 +98,7 @@ class AvgAstModal extends Component {
     if (this.state.predictValue) {
       return (
         <Alert variant="primary" onClose={this.handleClose} dismissible>
-          The predict average assists in next season is{" "}
-          {this.state.predictValue}
+          The predict average steal in next block is {this.state.predictValue}
         </Alert>
       );
     } else return null;
@@ -192,11 +194,11 @@ class AvgAstModal extends Component {
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridAddress1">
-                <Form.Label>average assistance</Form.Label>
+                <Form.Label>average block</Form.Label>
                 <Form.Control
                   type="number"
-                  placeholder="Enter avg ast"
-                  onChange={(e) => this.setState({ avgAst: e.target.value })}
+                  placeholder="Enter avg blk"
+                  onChange={(e) => this.setState({ avgBlk: e.target.value })}
                 />
               </Form.Group>
             </Row>
@@ -259,4 +261,4 @@ class AvgAstModal extends Component {
   }
 }
 
-export default AvgAstModal;
+export default AvgBlkModal;

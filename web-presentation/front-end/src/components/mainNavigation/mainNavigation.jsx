@@ -23,8 +23,8 @@ class MainNavigation extends Component {
           <NavDropdown.Item href="/etl/team-ranking">Team Ranking Summary</NavDropdown.Item>
         </NavDropdown>
           <Nav.Link href="#">New Player Analytics</Nav.Link>
-          <Nav.Link href="#">MVP & All NBA Team</Nav.Link>
-          <Nav.Link href="#">Champion</Nav.Link>
+          <Nav.Link href="mvp-nba-all-team">MVP & All NBA Team</Nav.Link>
+          <Nav.Link href="/champion">Champion</Nav.Link>
           <Nav.Link href="/injury-age">Injury & Age</Nav.Link>
           <Nav.Link href="/salary">Player Salary</Nav.Link>
         </Nav>

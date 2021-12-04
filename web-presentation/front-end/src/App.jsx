@@ -10,6 +10,8 @@ import MainNavigation from "./components/mainNavigation/mainNavigation";
 import HomePage from "./pages/homePage/homePage";
 import AgeInjuryPlayerPage from "./pages/ageInjuryPlayerPage/ageInjuryPlayerPage";
 import SalaryPage from "./pages/salaryPage/salaryPage";
+import MVPAllNBATeamPage from "./pages/mvpAllNBATeamPage/mvpAllNBATeamPage";
+import ChampionPage from "./pages/championPage/championPage";
 import TeamAbilitySummaryPage from "./pages/teamAbilitySummaryPage/teamAbilitySummaryPage";
 import TeamRankingSummaryPage from "./pages/teamRankingSummaryPage/teamRankingSummaryPage";
 import PlayerSalarySummary from "./pages/playerSalarySummaryPage/playerSalarySummaryPage";
@@ -44,6 +46,12 @@ class App extends React.Component {
           </Route>
           <Route path="/etl/player-info-summary">
             <PlayerInfoSummaryPage />
+          </Route>
+          <Route path="/mvp-nba-all-team">
+            <MVPAllNBATeamPage />
+          </Route>
+          <Route path="/champion">
+            <ChampionPage />
           </Route>
           <Route path="/injury-age">
             <AgeInjuryPlayerPage />

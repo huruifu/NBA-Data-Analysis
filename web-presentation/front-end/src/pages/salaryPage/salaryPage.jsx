@@ -10,6 +10,7 @@ class SalaryPage extends Component {
     salary_boxplot_byyear: "/salaryImages/salary_boxplot_byyear.png",
     salary_correlation: "/salaryImages/salary_correlation.png",
     salary_histogram: "/salaryImages/salary_histogram.png",
+    salary_featureImportance: "/salaryImages/salary_featureImportance.png",
     salary_predictions: "/salaryImages/salary_predictions.png",
   };
 
@@ -82,7 +83,7 @@ class SalaryPage extends Component {
         <Carousel.Item>
           <img
             className="d-block img-format"
-            src={this.state.salary_predictions}
+            src={this.state.salary_featureImportance}
             alt="First slide"
           />
           <br/>
@@ -93,6 +94,25 @@ class SalaryPage extends Component {
           <br/>
           <Carousel.Caption>
             <h3>Fourth slide label</h3>
+            <p>
+              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+            </p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block img-format"
+            src={this.state.salary_predictions}
+            alt="First slide"
+          />
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <Carousel.Caption>
+            <h3>Fifth slide label</h3>
             <p>
               Praesent commodo cursus magna, vel scelerisque nisl consectetur.
             </p>

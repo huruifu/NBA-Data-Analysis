@@ -8,11 +8,15 @@ import Col from "react-bootstrap/Col";
 
 import AvgPtsModal from "../modal/avgPtsModal";
 import AvgAstModal from "../modal/avgAstModal";
+import AvgStlModal from "../modal/avgStlModal";
+import AvgBlkModal from "../modal/avgBlkModal";
 
 class AgeInjuryPlayer extends Component {
   state = {
     avgPtsShow: false,
     avgAstShow: false,
+    avgStlShow: false,
+    avgBlkShow: false,
     playerMostInjuryImgPath: "/images/player_most_injury.png",
     teamMostInjuryImgPath: "/images/team_most_injury.png",
     correlationImgPath: "/images/correlation.png",
@@ -117,12 +121,14 @@ class AgeInjuryPlayer extends Component {
       {imgPath: "/images/heightDreb.png", description: "height and avg defensive rebound scatter plot"},
       {imgPath: "/images/weightDreb.png", description: "weight and avg defensive rebound scatter plot"},
 
-      {imgPath: "/images/countResidualDreb.png", description: "injury residual plot"},
-      {imgPath: "/images/logCountResidualDreb.png", description: "log injury residual plot"},
-      {imgPath: "/images/ageResidualDreb.png", description: "age residual plot"},
-      {imgPath: "/images/heightResidualDreb.png", description: "height residual plot"},
-      {imgPath: "/images/weightResidualDreb.png", description: "weight residual plot"},
-      {imgPath: "/images/drebResidualDreb.png", description: "average deffensive rebound last season residual plot"},
+      // {imgPath: "/images/countResidualDreb.png", description: "injury residual plot"},
+      // {imgPath: "/images/logCountResidualDreb.png", description: "log injury residual plot"},
+      // {imgPath: "/images/ageResidualDreb.png", description: "age residual plot"},
+      // {imgPath: "/images/heightResidualDreb.png", description: "height residual plot"},
+      // {imgPath: "/images/weightResidualDreb.png", description: "weight residual plot"},
+      // {imgPath: "/images/drebResidualDreb.png", description: "average deffensive rebound last season residual plot"},
+
+      {imgPath: "/images/drebImportanceFeature.png", description: "feature importance plot"},
 
       {imgPath: "/images/trueVsActualDreb.png", description: "validation prediction plot"},
     ],
@@ -132,12 +138,14 @@ class AgeInjuryPlayer extends Component {
       {imgPath: "/images/heightOreb.png", description: "height and avg offensive rebound scatter plot"},
       {imgPath: "/images/weightOreb.png", description: "weight and avg offensive rebound scatter plot"},
 
-      {imgPath: "/images/countResidualOreb.png", description: "injury residual plot"},
-      {imgPath: "/images/logCountResidualOreb.png", description: "log injury residual plot"},
-      {imgPath: "/images/ageResidualOreb.png", description: "age residual plot"},
-      {imgPath: "/images/heightResidualOreb.png", description: "height residual plot"},
-      {imgPath: "/images/weightResidualOreb.png", description: "weight residual plot"},
-      {imgPath: "/images/orebResidualOreb.png", description: "average offensive rebound last season residual plot"},
+      // {imgPath: "/images/countResidualOreb.png", description: "injury residual plot"},
+      // {imgPath: "/images/logCountResidualOreb.png", description: "log injury residual plot"},
+      // {imgPath: "/images/ageResidualOreb.png", description: "age residual plot"},
+      // {imgPath: "/images/heightResidualOreb.png", description: "height residual plot"},
+      // {imgPath: "/images/weightResidualOreb.png", description: "weight residual plot"},
+      // {imgPath: "/images/orebResidualOreb.png", description: "average offensive rebound last season residual plot"},
+
+      {imgPath: "/images/orebFeatureImportance.png", description: "feature importance plot"},
 
       {imgPath: "/images/trueVsActualOreb.png", description: "validation prediction plot"},
     ]
@@ -157,6 +165,22 @@ class AgeInjuryPlayer extends Component {
 
   handleAvgAstClose =() => {
     this.setState({avgAstShow: false})
+  }
+
+  handleAvgStlShow = () => {
+    this.setState({avgStlShow: true});
+  }
+
+  handleAvgStlClose =() => {
+    this.setState({avgStlShow: false})
+  }
+
+  handleAvgBlkShow = () => {
+    this.setState({avgBlkShow: true});
+  }
+
+  handleAvgBlkClose =() => {
+    this.setState({avgBlkShow: false})
   }
 
   render() {
@@ -285,6 +309,10 @@ class AgeInjuryPlayer extends Component {
                 </Col>
               ))}
             </Row>
+            <Button variant="primary" onClick={this.handleAvgStlShow}>
+              Launch demo
+            </Button>
+            <AvgStlModal value={this.state.avgStlShow} onHandleClose={this.handleAvgStlClose}/>
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="7">
@@ -305,6 +333,10 @@ class AgeInjuryPlayer extends Component {
                 </Col>
               ))}
             </Row>
+            <Button variant="primary" onClick={this.handleAvgBlkShow}>
+              Launch demo
+            </Button>
+            <AvgBlkModal value={this.state.avgBlkShow} onHandleClose={this.handleAvgBlkClose}/>
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="8">

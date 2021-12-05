@@ -1,0 +1,23 @@
+.img-format {
+    height: 30%;
+    width: 30%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.img-format_version2 {
+    height: 80%;
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* .card-one {
+    margin-left: 2%;
+}
+
+.card-two {
+    margin-left: 2%;
+} */

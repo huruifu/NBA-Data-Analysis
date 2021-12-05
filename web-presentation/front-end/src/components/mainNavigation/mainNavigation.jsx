@@ -13,7 +13,6 @@ class MainNavigation extends Component {
         <Container>
         <Nav className="me-auto">
           <Nav.Link href="/">Home</Nav.Link>
-          {/* <Nav.Link href="/injury-age">ETL</Nav.Link> */}
           <NavDropdown title="ETL" id="navbarScrollingDropdown">
           <NavDropdown.Item href="/etl/player-stat-summary">Player Stat Summary</NavDropdown.Item>
           <NavDropdown.Item href="/etl/player-info-summary">Player Info Summary</NavDropdown.Item>
@@ -22,7 +21,7 @@ class MainNavigation extends Component {
           <NavDropdown.Item href="/etl/team-ability">Team Ability Summary</NavDropdown.Item>
           <NavDropdown.Item href="/etl/team-ranking">Team Ranking Summary</NavDropdown.Item>
         </NavDropdown>
-          <Nav.Link href="#">New Player Analytics</Nav.Link>
+          <Nav.Link href="/new-player">New Player Analytics</Nav.Link>
           <Nav.Link href="mvp-nba-all-team">MVP & All NBA Team</Nav.Link>
           <Nav.Link href="/champion">Champion</Nav.Link>
           <Nav.Link href="/injury-age">Injury & Age</Nav.Link>

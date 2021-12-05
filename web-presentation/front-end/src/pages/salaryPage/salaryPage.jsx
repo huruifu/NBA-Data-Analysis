@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import Carousel from "react-bootstrap/Carousel";
 
 import "./salaryPage.css";
@@ -40,8 +39,7 @@ class SalaryPage extends Component {
           <br/>
           <br/>
           <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <h3>Salary boxplot by year</h3>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -57,8 +55,7 @@ class SalaryPage extends Component {
           <br/>
           <br/>
           <Carousel.Caption >
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h3>Salary Histogram</h3>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -74,10 +71,7 @@ class SalaryPage extends Component {
           <br/>
           <br/>
           <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
+            <h3>Salary Correlation</h3>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -93,15 +87,12 @@ class SalaryPage extends Component {
           <br/>
           <br/>
           <Carousel.Caption>
-            <h3>Fourth slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
+            <h3>Using tree model, salary feature Importance</h3>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <img
-            className="d-block img-format"
+            className="d-block img-format_v2"
             src={this.state.salary_predictions}
             alt="First slide"
           />
@@ -111,11 +102,10 @@ class SalaryPage extends Component {
           <br/>
           <br/>
           <br/>
+          <br/>
+          <br/>
           <Carousel.Caption>
-            <h3>Fifth slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
+            <h3>Prediction Vs Actual Value</h3>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>

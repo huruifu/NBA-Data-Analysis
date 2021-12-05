@@ -10,6 +10,7 @@ import MainNavigation from "./components/mainNavigation/mainNavigation";
 import HomePage from "./pages/homePage/homePage";
 import AgeInjuryPlayerPage from "./pages/ageInjuryPlayerPage/ageInjuryPlayerPage";
 import SalaryPage from "./pages/salaryPage/salaryPage";
+import NewPlayerPage from "./pages/newPlayerPage/newPlayerPage";
 import MVPAllNBATeamPage from "./pages/mvpAllNBATeamPage/mvpAllNBATeamPage";
 import ChampionPage from "./pages/championPage/championPage";
 import TeamAbilitySummaryPage from "./pages/teamAbilitySummaryPage/teamAbilitySummaryPage";
@@ -19,7 +20,7 @@ import PlayerInjurySummaryPage from "./pages/playerInjurySummaryPage/playerInjur
 import PlayerStatSummaryPage from "./pages/playerStatSummaryPage/playerStatSummaryPage";
 import PlayerInfoSummaryPage from "./pages/playerInfoSummaryPage/playerInfoSummaryPage";
 
-class App extends React.Component {
+class App extends Component {
   render() {
     return (
       <div>
@@ -46,6 +47,9 @@ class App extends React.Component {
           </Route>
           <Route path="/etl/player-info-summary">
             <PlayerInfoSummaryPage />
+          </Route>
+          <Route path="/new-player">
+            <NewPlayerPage />
           </Route>
           <Route path="/mvp-nba-all-team">
             <MVPAllNBATeamPage />

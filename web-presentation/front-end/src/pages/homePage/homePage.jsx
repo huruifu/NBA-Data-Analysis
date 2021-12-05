@@ -1,21 +1,26 @@
 import React, { Component } from "react";
-import Image from "react-bootstrap/Image";
 
 import "./homePage.css";
 
-
 class HomePage extends Component {
   state = {
-    backgroundImgPath: "/images/background.jpg"
+    backgroundImgPath: "/images/background.jpg",
   };
 
   render() {
     return (
-      <div className="container">
-        {/* <Image className="background" src={this.state.backgroundImgPath} fluid/> */}
-        <img className="background-image" src={this.state.backgroundImgPath} />
-        {/* <div class="background-image"></div> */}
-        <div class="centered">Centered</div>
+      // <div className="container">
+      //   <img className="background-image" src={this.state.backgroundImgPath} />
+      //   <div class="centered">Centered</div>
+      // </div>
+      <div style={{
+         backgroundImage: "url(/images/background.jpg)",
+         backgroundPosition: 'top',
+         minHeight: '50%',
+         height: '100vh',
+         position: 'relative',
+         display: 'block'
+         }}>
       </div>
     );
   }

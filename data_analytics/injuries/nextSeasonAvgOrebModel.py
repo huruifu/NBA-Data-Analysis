@@ -119,7 +119,18 @@ def main():
                             "nextSeasonHeight", "nextSeasonWeight"],
                            treeCV.featureImportances.toArray())
     plot_validation_result(predDF.select("prediction").collect(), predDF.select("nextSeasonAvgOreb").collect())
-    # print(treeCV.toDebugString)
+    
+    player = (player
+              .withColumn("avgOreb", functions.col("totalOreb")/functions.col("totalGames")))
+    player.cache()
+    plot_scatter(player.select("count").collect(), player.select("avgOreb").collect(), "number of injuries",
+                           "average offensive rebound")
+    plot_scatter(player.select("age").collect(), player.select("avgOreb").collect(), "age",
+                           "average offensive rebound")
+    plot_scatter(player.select("player_height").collect(), player.select("avgOreb").collect(), "height",
+                           "average offensive rebound")
+    plot_scatter(player.select("player_weight").collect(), player.select("avgOreb").collect(), "weight",
+                           "average offensive rebound")
     
 
 

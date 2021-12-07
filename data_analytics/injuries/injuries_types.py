@@ -53,18 +53,7 @@ def main():
     injuries = (spark.read.format("csv")
                 .option("header", "true")
                 .schema(injuries_schema)
-                .load(injury_inputs)
-                # .where((functions.col("injury_name") != "placed on IL") & (functions.col("injury_name") != "fined $50,000 by NBA for using inappropriate language during game"))
-                # .withColumn("injury_name", format_injury_name(functions.col("injury_name")))
-                # .withColumn("year", functions.year(functions.col("Date")))
-                # .withColumn("month", functions.month(functions.col("Date")))
-                # # 2019 season is a special season
-                # .withColumn("played_season",
-                #             functions.when(functions.col("year")
-                #                            == 2020, functions.col("year") - 1)
-                #             .when(functions.col("month") >= 10, functions.col("year"))
-                #             .otherwise(functions.col("year") - 1))
-                )
+                .load(injury_inputs))
     injuries.cache()
 
     player_info = (spark.read.format("csv")

@@ -124,6 +124,18 @@ def main():
                             "nextSeasonHeight", "nextSeasonWeight"],
                            treeCV.featureImportances.toArray())
     
+    player = (player
+              .withColumn("avgDreb", functions.col("totalDreb")/functions.col("totalGames")))
+    player.cache()
+    plot_scatter(player.select("count").collect(), player.select("avgDreb").collect(), "number of injuries",
+                           "average defensive rebound")
+    plot_scatter(player.select("age").collect(), player.select("avgDreb").collect(), "age",
+                           "average defensive rebound")
+    plot_scatter(player.select("player_height").collect(), player.select("avgDreb").collect(), "height",
+                           "average defensive rebound")
+    plot_scatter(player.select("player_weight").collect(), player.select("avgDreb").collect(), "weight",
+                           "average defensive rebound")
+    
 
 
 

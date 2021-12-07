@@ -28,17 +28,6 @@ def main():
                 .option("header", "true")
                 .schema(injuries_schema)
                 .load(injuries_inputs)
-                # .where((functions.col("injury_name") != "placed on IL") & (functions.col("injury_name") != "fined $50,000 by NBA for using inappropriate language during game"))
-                # .withColumn("status",
-                #             functions.when(functions.col("status").isNull(), "do not rest").otherwise(functions.col("status")))
-                # .withColumn("year", functions.year(functions.col("Date")))
-                # .withColumn("month", functions.month(functions.col("Date")))
-                # # 2019 season is a special season
-                # .withColumn("played_season",
-                #             functions.when(functions.col("year")
-                #                            == 2020, functions.col("year") - 1)
-                #             .when(functions.col("month") >= 10, functions.col("year"))
-                #             .otherwise(functions.col("year") - 1))
                 .drop("year")
                 .drop("month")
                 .orderBy("Relinquished", "Date"))

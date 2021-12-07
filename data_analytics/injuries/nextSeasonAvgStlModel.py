@@ -109,27 +109,27 @@ def main():
     print(lrCV.intercept)
     
     
-    # trainDF = (trainDF
-    #            .withColumn("residual", functions.col("nextSeasonAvgStl") - functions.col("prediction")))
+    trainDF = (trainDF
+               .withColumn("residual", functions.col("nextSeasonAvgStl") - functions.col("prediction")))
     
-    # plot_residual(trainDF.select("count").collect(), trainDF.select("residual").collect(), "injury", "residual")
-    # plot_residual(trainDF.select("age").collect(), trainDF.select("residual").collect(), "age", "residual")
-    # plot_residual(trainDF.select("height").collect(), trainDF.select("residual").collect(), "height", "residual")
-    # plot_residual(trainDF.select("weight").collect(), trainDF.select("residual").collect(), "weight", "residual")
-    # plot_residual(trainDF.select("avgStl").collect(), trainDF.select("residual").collect(), "avgStl", "residual")
+    plot_residual(trainDF.select("count").collect(), trainDF.select("residual").collect(), "injury", "residual")
+    plot_residual(trainDF.select("age").collect(), trainDF.select("residual").collect(), "age", "residual")
+    plot_residual(trainDF.select("height").collect(), trainDF.select("residual").collect(), "height", "residual")
+    plot_residual(trainDF.select("weight").collect(), trainDF.select("residual").collect(), "weight", "residual")
+    plot_residual(trainDF.select("avgStl").collect(), trainDF.select("residual").collect(), "avgStl", "residual")
     
     
-    # player = (player
-    #           .withColumn("avgStl", functions.col("totalStl")/functions.col("totalGames")))
-    # player.cache()
-    # plot_scatter(player.select("count").collect(), player.select("avgStl").collect(), "number of injuries",
-    #                        "average steal")
-    # plot_scatter(player.select("age").collect(), player.select("avgStl").collect(), "age",
-    #                        "average steal")
-    # plot_scatter(player.select("player_height").collect(), player.select("avgStl").collect(), "height",
-    #                        "average steal")
-    # plot_scatter(player.select("player_weight").collect(), player.select("avgStl").collect(), "weight",
-    #                        "average steal")
+    player = (player
+              .withColumn("avgStl", functions.col("totalStl")/functions.col("totalGames")))
+    player.cache()
+    plot_scatter(player.select("count").collect(), player.select("avgStl").collect(), "number of injuries",
+                           "average steal")
+    plot_scatter(player.select("age").collect(), player.select("avgStl").collect(), "age",
+                           "average steal")
+    plot_scatter(player.select("player_height").collect(), player.select("avgStl").collect(), "height",
+                           "average steal")
+    plot_scatter(player.select("player_weight").collect(), player.select("avgStl").collect(), "weight",
+                           "average steal")
     
     # plot_validation_result(predDF.select("prediction").collect(), predDF.select("nextSeasonAvgStl").collect()) 
     # df = trainDF.select("count", "height", "weight", "avgPts", "nextSeasonAge",

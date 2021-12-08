@@ -47,8 +47,8 @@ def plot_validation_result(predicts, actuals):
     actuals_np = np.array(actuals)
     plt.figure(figsize=(10,10))
     plt.scatter(predicts_np, actuals_np, c='crimson')
-    plt.yscale('log')
-    plt.xscale('log')
+    # plt.yscale('log')
+    # plt.xscale('log')
     p1 = max(max(predicts_np), max(actuals_np))
     p2 = min(min(predicts_np), min(actuals_np))
     plt.plot([p1, p2], [p1, p2], 'b-')
@@ -79,6 +79,34 @@ def plot_corr(df):
 
     fig.tight_layout()  
     plt.show()
+    
+
+def plot_scatter(list1, list2, xlabel, ylabel):
+    arr1 = np.array(list1)
+    arr2 = np.array(list2)
+    plt.xlabel(xlabel, fontsize=15)
+    plt.ylabel(ylabel, fontsize=15)
+    plt.scatter(arr1, arr2)
+    plt.show()            
           
+
+def plot_residual(xlist, ylist, xlabel, ylabel):
+    arr1 = np.array(xlist)
+    arr2 = np.array(ylist)
+    plt.xlabel(xlabel, fontsize=15)
+    plt.ylabel(ylabel, fontsize=15)
+    sns.residplot(arr1, arr2)
+    plt.show()
     
-    
+def plot_featureImportance(featureList, importanceList):
+    x_values = list(range(len(importanceList)))
+    plt.figure()
+    plt.bar(x_values, importanceList, orientation='vertical')
+    plt.xticks(x_values, featureList, rotation=40)
+    plt.ylabel('Importance')
+    plt.xlabel('Feature')
+    plt.title('Feature Importances')
+    plt.show()
+
+        
+   

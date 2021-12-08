@@ -31,7 +31,7 @@ class SalaryPage extends Component {
           <Col sm={3}>
             <Nav variant="pills" className="flex-column">
               <Nav.Item>
-                <Nav.Link eventKey="first">Salary boplot</Nav.Link>
+                <Nav.Link eventKey="first">Salary boxplot</Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="second">Salary Histogram</Nav.Link>

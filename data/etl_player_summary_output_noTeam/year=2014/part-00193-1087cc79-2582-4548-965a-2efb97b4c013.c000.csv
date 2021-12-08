@@ -1,0 +1,2 @@
+PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
+201950,Jrue Holiday,5.32,12.14,1.12,3.04,1.6,1.84,0.7,2.32,3.02,6.14,1.48,0.54,2.14,2.48,13.36,2.96,266.0,607.0,56.0,152.0,80.0,92.0,35.0,116.0,151.0,307.0,74.0,27.0,107.0,124.0,668.0,148.0,50,1806.16,90308.0

@@ -1,0 +1,13 @@
+.img-format {
+    height: 50%;
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.table {
+    overflow: auto;
+    display: block;
+    table-layout: auto;
+}

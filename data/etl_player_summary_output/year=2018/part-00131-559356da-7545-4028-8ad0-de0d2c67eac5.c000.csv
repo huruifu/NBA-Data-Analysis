@@ -1,0 +1,4 @@
+TEAM_ID,PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
+1610612743,202388,Donald Sloan,2.0,4.5,0.5,2.5,1.5,2.0,0.0,1.5,1.5,2.5,0.0,0.0,2.5,0.5,6.0,1.5,4.0,9.0,1.0,5.0,3.0,4.0,0.0,3.0,3.0,5.0,0.0,0.0,5.0,1.0,12.0,3.0,2,741.5,1483.0
+1610612755,1626148,Anthony Brown,0.0,1.0,0.0,1.0,0.0,0.0,0.0,2.0,2.0,0.0,0.0,1.0,0.0,1.0,0.0,-1.0,0.0,1.0,0.0,1.0,0.0,0.0,0.0,2.0,2.0,0.0,0.0,1.0,0.0,1.0,0.0,-1.0,1,404.0,404.0
+1610612766,1629145,Isaiah Wilkins,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,-7.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,-7.0,1,161.0,161.0

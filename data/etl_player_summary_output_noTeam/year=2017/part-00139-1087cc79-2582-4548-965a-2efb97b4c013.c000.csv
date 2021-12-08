@@ -1,0 +1,3 @@
+PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
+203902,Semaj Christon,3.0,8.0,1.0,2.0,0.0,0.0,0.0,3.0,3.0,1.0,0.0,0.0,1.0,1.0,7.0,10.0,3.0,8.0,1.0,2.0,0.0,0.0,0.0,3.0,3.0,1.0,0.0,0.0,1.0,1.0,7.0,10.0,1,1287.0,1287.0
+162777,Georges Niang,0.0,1.0,0.0,1.0,3.0,4.0,0.0,1.0,1.0,0.0,1.0,0.0,2.0,0.0,3.0,-11.0,0.0,1.0,0.0,1.0,3.0,4.0,0.0,1.0,1.0,0.0,1.0,0.0,2.0,0.0,3.0,-11.0,1,512.0,512.0

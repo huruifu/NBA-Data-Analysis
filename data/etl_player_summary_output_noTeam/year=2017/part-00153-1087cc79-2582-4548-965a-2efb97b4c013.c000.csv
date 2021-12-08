@@ -1,0 +1,2 @@
+PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
+1628504,Xavier Rathan-Mayes,1.625,6.375,0.125,2.125,0.5,1.375,0.0,0.75,0.75,2.5,0.875,0.375,1.625,3.0,3.875,-10.125,13.0,51.0,1.0,17.0,4.0,11.0,0.0,6.0,6.0,20.0,7.0,3.0,13.0,24.0,31.0,-81.0,8,1069.875,8559.0

@@ -1,4 +1,0 @@
-TEAM_ID,PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
-1610612754,1629103,Kelan Martin,1.8,5.8,0.6,3.0,0.6,1.2,0.4,1.0,1.4,0.6,0.8,0.0,1.0,1.6,4.8,-5.8,9.0,29.0,3.0,15.0,3.0,6.0,2.0,5.0,7.0,3.0,4.0,0.0,5.0,8.0,24.0,-29.0,5,707.2,3536.0
-1610612753,1630257,Jon Teske,0.0,0.0,0.0,0.0,0.0,0.0,2.0,2.0,4.0,0.0,0.0,0.0,0.0,1.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,2.0,4.0,0.0,0.0,0.0,0.0,1.0,0.0,2.0,1,284.0,284.0
-1610612742,1628499,Antonius Cleveland,0.9375,2.375,0.25,0.75,0.3125,0.5625,0.375,0.6875,1.0625,0.25,0.25,0.375,0.1875,1.0625,2.4375,-0.8125,15.0,38.0,4.0,12.0,5.0,9.0,6.0,11.0,17.0,4.0,4.0,6.0,3.0,17.0,39.0,-13.0,16,397.3125,6357.0

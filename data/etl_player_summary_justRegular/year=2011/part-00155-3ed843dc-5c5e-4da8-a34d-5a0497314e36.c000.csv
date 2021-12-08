@@ -1,0 +1,4 @@
+TEAM_ID,PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
+1610612758,202715,Tyler Honeycutt,0.4375,1.4375,0.0625,0.25,0.25,0.4375,0.1875,0.4375,0.625,0.375,0.25,0.25,0.3125,0.1875,1.1875,-0.2857142857142857,7.0,23.0,1.0,4.0,4.0,7.0,3.0,7.0,10.0,6.0,4.0,4.0,5.0,3.0,19.0,-4.0,16,274.4375,4391.0
+1610612759,202371,Gani Lawal,0.5,3.0,0.0,0.0,0.5,0.5,0.5,2.0,2.5,0.0,0.0,0.5,1.0,1.5,1.5,"",1.0,6.0,0.0,0.0,1.0,1.0,1.0,4.0,5.0,0.0,0.0,1.0,2.0,3.0,3.0,"",2,11.5,23.0
+1610612763,1962936489,Brian Skinner,2.0,5.0,0.0,0.0,0.0,0.0,2.0,7.0,9.0,0.0,1.0,2.0,0.0,3.0,4.0,"",2.0,5.0,0.0,0.0,0.0,0.0,2.0,7.0,9.0,0.0,1.0,2.0,0.0,3.0,4.0,"",1,28.0,28.0

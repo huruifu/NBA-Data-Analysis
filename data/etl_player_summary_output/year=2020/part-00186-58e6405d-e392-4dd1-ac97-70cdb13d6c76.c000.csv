@@ -1,2 +1,0 @@
-TEAM_ID,PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
-1610612751,1629743,Donta Hall,2.125,2.875,0.0,0.0,0.75,2.0,1.375,2.125,3.5,0.25,0.25,0.875,0.5,1.875,5.0,-3.125,17.0,23.0,0.0,0.0,6.0,16.0,11.0,17.0,28.0,2.0,2.0,7.0,4.0,15.0,40.0,-25.0,8,788.875,6311.0

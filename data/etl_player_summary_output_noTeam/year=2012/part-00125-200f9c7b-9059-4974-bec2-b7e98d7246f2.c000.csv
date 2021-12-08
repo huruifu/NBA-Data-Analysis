@@ -1,0 +1,3 @@
+PLAYER_ID,PLAYER_NAME,avg(FGM),avg(FGA),avg(FG3M),avg(FG3A),avg(FTM),avg(FTA),avg(OREB),avg(DREB),avg(REB),avg(AST),avg(STL),avg(BLK),avg(TO),avg(PF),avg(PTS),avg(PLUS_MINUS),sum(FGM),sum(FGA),sum(FG3M),sum(FG3A),sum(FTM),sum(FTA),sum(OREB),sum(DREB),sum(REB),sum(AST),sum(STL),sum(BLK),sum(TO),sum(PF),sum(PTS),sum(PLUS_MINUS),sum(ifminute),avg(seconds),sum(seconds)
+101204,Dwayne Jones,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,-3.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,-6.0,2,57.0,114.0
+202345,Damion James,1.75,4.375,0.0,0.0,1.375,1.625,1.875,3.375,5.25,1.25,0.375,0.25,1.125,2.25,4.875,-0.5,14.0,35.0,0.0,0.0,11.0,13.0,15.0,27.0,42.0,10.0,3.0,2.0,9.0,18.0,39.0,-1.0,8,17.375,139.0

@@ -54,8 +54,6 @@ def main():
               .repartition(8))
 
     train, validation = player.randomSplit([0.6, 0.4])
-    print(train.count())
-    print(validation.count())
     train = train.cache()
     validation = validation.cache()
     position_indexer = StringIndexer(
@@ -134,9 +132,8 @@ def main():
                            "average score")
     
     # plot_validation_result(predDF.select("prediction").collect(), predDF.select("nextSeasonAvgPts").collect()) 
-    # df = trainDF.select("count", "height", "weight", "avgPts", "nextSeasonAge",
-    #                   "nextSeasonHeight", "nextSeasonWeight", "nextSeasonAvgPts").toPandas()
-    # plot_corr(df)
+    df = trainDF.select("count", "height", "weight", "avgPts", "nextSeasonHeight", "nextSeasonWeight").toPandas()
+    plot_corr(df)
 
     
 

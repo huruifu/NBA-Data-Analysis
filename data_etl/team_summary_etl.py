@@ -52,7 +52,6 @@ def main(inputs, output):
                   .select('GAME_DATE_EST', 'HOME_TEAM_ID', 'VISITOR_TEAM_ID', 'SEASON', 'PTS_home',
                           'AST_home', 'REB_home', 'PTS_away', 'AST_away', 'REB_away')
     classify = functions.udf(match_type, types.StringType())
-    # d1
     game_stats = game.withColumn('PTS_home', game['PTS_home'].cast(types.IntegerType()))\
                      .withColumn('AST_home', game['AST_home'].cast(types.IntegerType()))\
                      .withColumn('REB_home', game['REB_home'].cast(types.IntegerType()))\
@@ -60,11 +59,7 @@ def main(inputs, output):
                      .withColumn('REB_away', game['REB_away'].cast(types.IntegerType()))\
                      .withColumn('AST_away', game['AST_away'].cast(types.IntegerType()))\
                      .withColumn('type', classify('GAME_DATE_EST', 'SEASON'))
-    # Regular
     regular_game_stats = game_stats.where(game_stats.type == 'regular')
-
-    # # PlayOff
-    # playoff_game_stats = game_stats.where(game_stats.type == 'playoff')
 
     regular_team_home = regular_game_stats.groupBy('HOME_TEAM_ID', 'SEASON')\
                                           .agg(functions.avg('PTS_home').alias("avg_PTS_home"),
@@ -79,17 +74,12 @@ def main(inputs, output):
     regular_team_summary = regular_team_home.join(functions.broadcast(regular_team_away), ['TEAM_ID', 'SEASON'])\
                                             .sort('SEASON', 'TEAM_ID').cache()
 
-    # ---------- print ----------
-    min_value = 2010
-    max_value = 2020
-    # max_value = int(regular_team_summary.agg({"SEASON": "max"}).collect()[0][0])
-    # min_value = int(regular_team_summary.agg({"SEASON": "min"}).collect()[0][0])
-    for i in range(min_value, max_value + 1):
+    for i in range(2010, 2021):
         temp = regular_team_summary.where(regular_team_summary.SEASON == str(i))\
                                    .select('TEAM_ID', 'avg_PTS_home', 'avg_REB_home', 'avg_AST_home',
                                            'avg_PTS_away', 'avg_REB_away', 'avg_AST_away')\
                                    .coalesce(1)
-        temp.write.csv(output + '/REGULAR_SEASON_' + str(i), header=True, mode='overwrite')
+        temp.write.csv(output + '/year=' + str(i), header=True, mode='overwrite')
 
 
 if __name__ == '__main__':

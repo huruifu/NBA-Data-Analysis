@@ -110,6 +110,7 @@ def main():
     r2 = r2_evaluator.evaluate(predDF)
     print(f"r2 validation for predicting nextSeasonAvgAst is {r2}")
     treeCV = rfrModelCV.stages[-1].bestModel
+    rfrModelCV.write().overwrite().save(outputs)
     # print(treeCV.featureImportances.toArray())
     # print(treeCV.toDebugString)
     plot_validation_result(predDF.select("prediction").collect(), predDF.select("nextSeasonAvgDreb").collect()) 
@@ -134,6 +135,7 @@ def main():
 
 if __name__ == '__main__':
     player_inputs = sys.argv[1]
+    outputs = sys.argv[2]
     spark = SparkSession.builder.appName('example code').getOrCreate()
     assert spark.version >= '3.0'  # make sure we have Spark 3.0+
     spark.sparkContext.setLogLevel('WARN')

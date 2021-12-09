@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.evaluation.RegressionEvaluator","timestamp":1639081756260,"sparkVersion":"3.1.2","uid":"RegressionEvaluator_ec8b8dc9622a","paramMap":{"predictionCol":"prediction","labelCol":"nextSeasonAvgStl","metricName":"r2"},"defaultParamMap":{"predictionCol":"prediction","labelCol":"label","throughOrigin":false,"metricName":"rmse"}}

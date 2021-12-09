@@ -6,9 +6,10 @@ import "./championPage.css";
 class ChampionPage extends Component {
   state = {
     index: 0,
-    championImg: "/mac/champion.png",
+    championImg: "/mac/champion.jpeg",
     featureImportanceImg: "/mac/champion-fi.jpeg",
-    correlation: "/mac/coorelation.jpeg"
+    // correlation: "/mac/coorelation.jpeg"
+    championAndTeamRank: "mac/championAndTeamRank.jpeg"
   };
 
   handleSelect = (selectedIndex, e) => {
@@ -26,7 +27,7 @@ class ChampionPage extends Component {
         <Carousel.Item eventKey="0">
           <img
             className="d-block img-format-v2"
-            src={this.state.correlation}
+            src={this.state.championAndTeamRank}
             width="50"
             alt="First slide"
           />
@@ -37,7 +38,7 @@ class ChampionPage extends Component {
           <br />
           <br />
           <Carousel.Caption>
-            <h3>Feature Correlation</h3>
+            <h3>Probability plot of championship and regular season ranking</h3>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item eventKey="1">

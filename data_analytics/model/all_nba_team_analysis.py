@@ -7,8 +7,13 @@ from pyspark.ml import Pipeline
 from pyspark.ml.feature import StringIndexer, VectorAssembler, SQLTransformer
 from pyspark.ml.classification import RandomForestClassifier
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
+<<<<<<< HEAD
 
 import matplotlib.pyplot as plt
+=======
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud
+>>>>>>> d193685cc08bb9ef2bd73ccfd02fd4dc5a550186
 
 
 def all_nba_team(year, name):
@@ -184,6 +189,7 @@ def all_nba_team(year, name):
         return '4'
 
 
+<<<<<<< HEAD
 def main(player_summary_path, player_info_path, team_summary_path, team_rank_path, model_file):
     player_summary = spark.read.option("delimiter", ",").option("header", "true").csv(player_summary_path)
     player_summary = player_summary.withColumn('year', player_summary['year'].cast(types.StringType()))
@@ -194,6 +200,18 @@ def main(player_summary_path, player_info_path, team_summary_path, team_rank_pat
     team_rank = team_rank.withColumn('year', team_rank['year'].cast(types.StringType()))
     player_info = player_info.withColumnRenamed('PLAYER_ID', 'dup_PLAYER_ID') \
         .withColumnRenamed('player_name', 'dup_PLAYER_NAME')
+=======
+def main(player_summary_path, player_info_path, team_summary_path, team_rank_path):
+    player_summary = spark.read.option("delimiter", ",").option("header", "true").csv(player_summary_path)
+    player_summary = player_summary.withColumn('year', player_summary['year'].cast(types.StringType())).cache()
+    player_info = spark.read.option("header", "true").csv(player_info_path).cache()
+    team_summary = spark.read.option("delimiter", ",").option("header", "true").csv(team_summary_path)
+    team_summary = team_summary.withColumn('year', team_summary['year'].cast(types.StringType())).cache()
+    team_rank = spark.read.option("delimiter", ",").option("header", "true").csv(team_rank_path)
+    team_rank = team_rank.withColumn('year', team_rank['year'].cast(types.StringType())).cache()
+    player_info = player_info.withColumnRenamed('PLAYER_ID', 'dup_PLAYER_ID') \
+                  .withColumnRenamed('player_name', 'dup_PLAYER_NAME')
+>>>>>>> d193685cc08bb9ef2bd73ccfd02fd4dc5a550186
     player_stats = player_summary.join(functions.broadcast(player_info),
                                        (player_info.dup_PLAYER_NAME == player_summary.PLAYER_NAME)
                                        & (player_info.season == player_summary.year)) \
@@ -263,6 +281,7 @@ def main(player_summary_path, player_info_path, team_summary_path, team_rank_pat
         .withColumn('W', player['W'].cast(types.FloatType())) \
         .withColumn('W_PCT', player['W_PCT'].cast(types.FloatType())) \
         .withColumn('year', player['year'].cast(types.FloatType()))
+<<<<<<< HEAD
     player = player.select('avg(FGM)', 'avg(FGA)', 'avg(FG3M)', 'avg(FG3A)', 'avg(FTM)', 'avg(FTA)', 'avg(OREB)', \
                            'avg(DREB)', 'avg(REB)', 'avg(AST)', 'avg(STL)', 'avg(BLK)', 'avg(TO)', 'avg(PF)',
                            'avg(PTS)', \
@@ -275,16 +294,40 @@ def main(player_summary_path, player_info_path, team_summary_path, team_rank_pat
                            'avg_PTS_home', \
                            'avg_REB_home', 'avg_AST_home', 'avg_PTS_away', 'avg_REB_away', 'avg_AST_away', 'W', 'W_PCT',
                            'all_nba_team')
+=======
+    player = player.select('avg(FGM)', 'avg(FGA)', 'avg(FG3M)', 'avg(FG3A)', 'avg(FTM)', 'avg(FTA)', 'avg(OREB)',
+                           'avg(DREB)', 'avg(REB)', 'avg(AST)', 'avg(STL)', 'avg(BLK)', 'avg(TO)', 'avg(PF)',
+                           'avg(PTS)',
+                           'avg(PLUS_MINUS)', 'sum(FGM)', 'sum(FGA)', 'sum(FG3M)', 'sum(FG3A)', 'sum(FTM)', 'sum(FTA)',
+                           'sum(OREB)', 'sum(DREB)', 'sum(REB)', 'sum(AST)', 'sum(STL)', 'sum(BLK)', 'sum(TO)',
+                           'sum(PF)',
+                           'sum(PTS)', 'sum(PLUS_MINUS)', 'sum(ifminute)', 'avg(seconds)', 'sum(seconds)', 'year',
+                           'age', \
+                           'player_height', 'player_weight', 'draft_year', 'draft_round', 'draft_number',
+                           'avg_PTS_home',
+                           'avg_REB_home', 'avg_AST_home', 'avg_PTS_away', 'avg_REB_away', 'avg_AST_away', 'W', 'W_PCT',
+                           'all_nba_team')
+
+>>>>>>> d193685cc08bb9ef2bd73ccfd02fd4dc5a550186
     train, validation = player.randomSplit([0.75, 0.25])
     train = train.cache()
     validation = validation.cache()
     assembler = VectorAssembler(
+<<<<<<< HEAD
         inputCols=['avg(FGM)', 'avg(FGA)', 'avg(FG3M)', 'avg(FG3A)', 'avg(FTM)', 'avg(FTA)', 'avg(OREB)', \
                    'avg(DREB)', 'avg(REB)', 'avg(AST)', 'avg(STL)', 'avg(BLK)', 'avg(TO)', 'avg(PF)', 'avg(PTS)', \
                    'avg(PLUS_MINUS)', 'sum(FGM)', 'sum(FGA)', 'sum(FG3M)', 'sum(FG3A)', 'sum(FTM)', 'sum(FTA)', \
                    'sum(OREB)', 'sum(DREB)', 'sum(REB)', 'sum(AST)', 'sum(STL)', 'sum(BLK)', 'sum(TO)', 'sum(PF)', \
                    'sum(PTS)', 'sum(PLUS_MINUS)', 'sum(ifminute)', 'avg(seconds)', 'sum(seconds)', 'year', 'age', \
                    'player_height', 'player_weight', 'draft_year', 'draft_round', 'draft_number', 'avg_PTS_home', \
+=======
+        inputCols=['avg(FGM)', 'avg(FGA)', 'avg(FG3M)', 'avg(FG3A)', 'avg(FTM)', 'avg(FTA)', 'avg(OREB)',
+                   'avg(DREB)', 'avg(REB)', 'avg(AST)', 'avg(STL)', 'avg(BLK)', 'avg(TO)', 'avg(PF)', 'avg(PTS)',
+                   'avg(PLUS_MINUS)', 'sum(FGM)', 'sum(FGA)', 'sum(FG3M)', 'sum(FG3A)', 'sum(FTM)', 'sum(FTA)',
+                   'sum(OREB)', 'sum(DREB)', 'sum(REB)', 'sum(AST)', 'sum(STL)', 'sum(BLK)', 'sum(TO)', 'sum(PF)',
+                   'sum(PTS)', 'sum(PLUS_MINUS)', 'sum(ifminute)', 'avg(seconds)', 'sum(seconds)', 'year', 'age',
+                   'player_height', 'player_weight', 'draft_year', 'draft_round', 'draft_number', 'avg_PTS_home',
+>>>>>>> d193685cc08bb9ef2bd73ccfd02fd4dc5a550186
                    'avg_REB_home', 'avg_AST_home', 'avg_PTS_away', 'avg_REB_away', 'avg_AST_away', 'W', 'W_PCT'],
         outputCol='features', handleInvalid="skip")
     indexer = StringIndexer(inputCol='all_nba_team', outputCol='label')
@@ -295,6 +338,7 @@ def main(player_summary_path, player_info_path, team_summary_path, team_rank_pat
     evaluator = MulticlassClassificationEvaluator(predictionCol="prediction", labelCol="label")
     score = evaluator.evaluate(predictions)
     print('Validation score for model: %g' % (score,))
+<<<<<<< HEAD
     feature_list = ['avg(FGM)', 'avg(FGA)', 'avg(FG3M)', 'avg(FG3A)', 'avg(FTM)', 'avg(FTA)', 'avg(OREB)', \
                    'avg(DREB)', 'avg(REB)', 'avg(AST)', 'avg(STL)', 'avg(BLK)', 'avg(TO)', 'avg(PF)', 'avg(PTS)', \
                    'avg(PLUS_MINUS)', 'sum(FGM)', 'sum(FGA)', 'sum(FG3M)', 'sum(FG3A)', 'sum(FTM)', 'sum(FTA)', \
@@ -304,13 +348,42 @@ def main(player_summary_path, player_info_path, team_summary_path, team_rank_pat
                    'avg_REB_home', 'avg_AST_home', 'avg_PTS_away', 'avg_REB_away', 'avg_AST_away', 'W', 'W_PCT']
     importances = model.stages[-1].featureImportances
     x_values = list(range(len(importances)))
+=======
+    feature_list = ['avg(FGM)', 'avg(FGA)', 'avg(FG3M)', 'avg(FG3A)', 'avg(FTM)', 'avg(FTA)', 'avg(OREB)',
+                   'avg(DREB)', 'avg(REB)', 'avg(AST)', 'avg(STL)', 'avg(BLK)', 'avg(TO)', 'avg(PF)', 'avg(PTS)',
+                   'avg(PLUS_MINUS)', 'sum(FGM)', 'sum(FGA)', 'sum(FG3M)', 'sum(FG3A)', 'sum(FTM)', 'sum(FTA)',
+                   'sum(OREB)', 'sum(DREB)', 'sum(REB)', 'sum(AST)', 'sum(STL)', 'sum(BLK)', 'sum(TO)', 'sum(PF)',
+                   'sum(PTS)', 'sum(PLUS_MINUS)', 'sum(ifminute)', 'avg(seconds)', 'sum(seconds)', 'year', 'age',
+                   'player_height', 'player_weight', 'draft_year', 'draft_round', 'draft_number', 'avg_PTS_home',
+                   'avg_REB_home', 'avg_AST_home', 'avg_PTS_away', 'avg_REB_away', 'avg_AST_away', 'W', 'W_PCT']
+    importances = model.stages[-1].featureImportances
+    x_values = list(range(len(importances)))
+
+    # draw feature importance graph
+>>>>>>> d193685cc08bb9ef2bd73ccfd02fd4dc5a550186
     plt.figure()
     plt.bar(x_values, importances, orientation='vertical')
     plt.xticks(x_values, feature_list, rotation='vertical', fontsize=4.5)
     plt.ylabel('Importance')
     plt.xlabel('Feature')
     plt.title('All nba team Feature Importances')
+<<<<<<< HEAD
     plt.savefig('allnba.png')
+=======
+    plt.savefig('allnba_feature.png')
+    # plt.show()
+
+    # draw feature importance graph in WordCloud
+    frequency_table = {}
+    for i in range(len(importances)):
+        frequency_table[feature_list[i]] = int(importances[i] * 1000)
+    wc = WordCloud(background_color='white',max_font_size=50, collocations=False)
+    wc.generate_from_frequencies(frequency_table)
+    plt.imshow(wc, interpolation='bilinear')
+    plt.axis('off')
+    plt.savefig('allnba_feature_WC.png')
+    # plt.show()
+>>>>>>> d193685cc08bb9ef2bd73ccfd02fd4dc5a550186
 
 
 if __name__ == '__main__':
@@ -318,8 +391,15 @@ if __name__ == '__main__':
     player_info = sys.argv[2]
     team_summary = sys.argv[3]
     team_rank = sys.argv[4]
+<<<<<<< HEAD
     model_file = sys.argv[5]
     spark = SparkSession.builder.appName('mvp').getOrCreate()
     spark.sparkContext.setLogLevel('WARN')
     assert spark.version >= '2.4'  # make sure we have Spark 2.4+
     main(player_summary, player_info, team_summary, team_rank, model_file)
+=======
+    spark = SparkSession.builder.appName('mvp').getOrCreate()
+    spark.sparkContext.setLogLevel('WARN')
+    assert spark.version >= '2.4'  # make sure we have Spark 2.4+
+    main(player_summary, player_info, team_summary, team_rank)
+>>>>>>> d193685cc08bb9ef2bd73ccfd02fd4dc5a550186

@@ -49,8 +49,6 @@ def main():
               .option("header", "true")
               .schema(player_schema)
               .csv(player_inputs)
-              .where(~functions.col("totalFga").isNull())
-              .where(~functions.col("totalFgm").isNull())
               .repartition(8))
     plot_corr(player.toPandas())
     

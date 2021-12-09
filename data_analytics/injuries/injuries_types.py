@@ -6,23 +6,6 @@ assert sys.version_info >= (3, 5)  # make sure we have Python 3.5+
 # add more functions as necessary
 
 
-# @functions.udf(returnType=types.StringType())
-# def format_injury_name(injury_name):
-#     if "placed on IL with" in injury_name:
-#         injury_name = injury_name.replace("placed on IL with", "")
-#     elif "placed on IL for" in injury_name:
-#         injury_name = injury_name.replace("placed on IL for", "")
-#     elif "placed on IL recovering from" in injury_name:
-#         injury_name = injury_name.replace("placed on IL recovering from", "")
-#     elif "placed on IL recoverimg from" in injury_name:
-#         injury_name = injury_name.replace("placed on IL recoverimg from", "")
-#     elif "placed on IL frecovering from" in injury_name:
-#         injury_name = injury_name.replace("placed on IL frecovering from", "")
-#     elif injury_name is None:
-#         return None
-#     return injury_name.strip()
-
-
 def main():
     # schema
     injuries_schema = types.StructType([
@@ -53,13 +36,15 @@ def main():
     injuries = (spark.read.format("csv")
                 .option("header", "true")
                 .schema(injuries_schema)
-                .load(injury_inputs))
+                .load(injury_inputs)
+                .repartition(8))
     injuries.cache()
 
     player_info = (spark.read.format("csv")
                    .option("header", "true")
                    .schema(player_info_schema)
-                   .load(player_info_inputs))
+                   .load(player_info_inputs)
+                   .repartition(8))
 
     # join two table frame
     player_injury = (injuries

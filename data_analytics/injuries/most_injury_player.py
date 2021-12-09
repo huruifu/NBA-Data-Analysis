@@ -17,7 +17,8 @@ def main(inputs):
     injuries = (spark.read.format("csv")
                 .option("header", "true")
                 .schema(injuries_schema)
-                .load(inputs))
+                .load(inputs)
+                .repartition(8))
     # looking into players who get injuries most
     most_injury_player = (injuries
      .groupBy(functions.col("Relinquished"))

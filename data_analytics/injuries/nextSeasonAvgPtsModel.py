@@ -7,7 +7,6 @@ from pyspark.ml.evaluation import RegressionEvaluator
 
 from plot_tools import plot_validation_result, plot_corr, plot_scatter, plot_residual
 
-import re
 import sys
 assert sys.version_info >= (3, 5)  # make sure we have Python 3.5+
 
@@ -49,8 +48,6 @@ def main():
               .option("header", "true")
               .schema(player_schema)
               .csv(player_inputs)
-              .where(~functions.col("totalFga").isNull())
-              .where(~functions.col("totalFgm").isNull())
               .repartition(8))
 
     train, validation = player.randomSplit([0.6, 0.4])
@@ -75,7 +72,7 @@ def main():
         predictionCol="prediction", labelCol="nextSeasonAvgPts", metricName="r2")
     sqlStatement = (
         """
-    SELECT t0.age, t0.status, t0.count AS count, t0.player_height AS height, t0.player_weight AS weight,
+    SELECT t0.age, t0.status, LOG(t0.count) AS count, t0.player_height AS height, t0.player_weight AS weight,
     (t0.totalPts / t0.totalGames) AS avgPts, t1.player_position, t1.age AS nextSeasonAge,
     t1.player_height AS nextSeasonHeight, t1.player_weight AS nextSeasonWeight,
     (t1.totalPts / t1.totalGames) AS nextSeasonAvgPts
@@ -103,17 +100,13 @@ def main():
     r2 = r2_evaluator.evaluate(predDF)
     print(f"r2 validation for predicting nextSeasonAvgPts is {r2}")
     lrCV = lrModelCV.stages[-1].bestModel
-    trainDF.groupBy("player_position", "player_position_encoder").agg(functions.count("*")).show()
-    trainDF.groupBy("status", "status_encoder").agg(functions.count("*")).show()
-    # print(predDF.count())
-    print(lrCV.coefficients)
-    print(lrCV.intercept)
-    
+    # print(lrCV.coefficients)
+    # print(lrCV.intercept)
     # residual plot
     trainDF = (trainDF
                .withColumn("residual", functions.col("nextSeasonAvgPts") - functions.col("prediction")))
     
-    plot_residual(trainDF.select("count").collect(), trainDF.select("residual").collect(), "injury", "residual")
+    plot_residual(trainDF.select("count").collect(), trainDF.select("residual").collect(), "LOG(number of injuries)", "residual")
     plot_residual(trainDF.select("age").collect(), trainDF.select("residual").collect(), "age", "residual")
     plot_residual(trainDF.select("height").collect(), trainDF.select("residual").collect(), "height", "residual")
     plot_residual(trainDF.select("weight").collect(), trainDF.select("residual").collect(), "weight", "residual")
@@ -131,7 +124,7 @@ def main():
     plot_scatter(player.select("player_weight").collect(), player.select("avgPts").collect(), "weight",
                            "average score")
     
-    # plot_validation_result(predDF.select("prediction").collect(), predDF.select("nextSeasonAvgPts").collect()) 
+    plot_validation_result(predDF.select("prediction").collect(), predDF.select("nextSeasonAvgPts").collect()) 
     df = trainDF.select("count", "height", "weight", "avgPts", "nextSeasonHeight", "nextSeasonWeight").toPandas()
     plot_corr(df)
 
@@ -141,7 +134,6 @@ def main():
 
 if __name__ == '__main__':
     player_inputs = sys.argv[1]
-    outputs = sys.argv[2]
     spark = SparkSession.builder.appName('example code').getOrCreate()
     assert spark.version >= '3.0'  # make sure we have Spark 3.0+
     spark.sparkContext.setLogLevel('WARN')

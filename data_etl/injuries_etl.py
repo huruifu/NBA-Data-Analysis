@@ -34,7 +34,8 @@ def main(inputs, outputs):
     injuries = (spark.read.format("csv")
                 .option("header", "true")
                 .schema(injuries_schema)
-                .load(inputs))
+                .load(inputs)
+                .repartition(8))
     # There are two data rows that Date, Team and Notes is null.
     # We can ignore these two rows.
 

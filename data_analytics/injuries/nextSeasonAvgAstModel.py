@@ -7,7 +7,6 @@ from pyspark.ml.evaluation import RegressionEvaluator
 
 from plot_tools import plot_validation_result, plot_corr, plot_scatter, plot_residual
 
-import re
 import sys
 assert sys.version_info >= (3, 5)  # make sure we have Python 3.5+
 
@@ -49,8 +48,6 @@ def main():
               .option("header", "true")
               .schema(player_schema)
               .csv(player_inputs)
-              .where(~functions.col("totalFga").isNull())
-              .where(~functions.col("totalFgm").isNull())
               .repartition(8))
 
     train, validation = player.randomSplit([0.6, 0.4])
@@ -96,28 +93,21 @@ def main():
                                     position_encoder, status_encoder, vectorAssembler, cv])
     lrModelCV = pipelineCV.fit(train)
     trainDF = lrModelCV.transform(train)
-    trainDF.show()
     r2_train = r2_evaluator.evaluate(trainDF)
     print(f"r2 training for predicting nextSeasonAvgAst is {r2_train}")
     predDF = lrModelCV.transform(validation)
     r2 = r2_evaluator.evaluate(predDF)
     print(f"r2 validation for predicting nextSeasonAvgAst is {r2}")
-    # lrCV = lrModelCV.stages[-1].bestModel
+    lrCV = lrModelCV.stages[-1].bestModel
     
-    # # incoder variable
-    # trainDF.groupBy("player_position", "player_position_encoder").agg(functions.count("*")).show()
-    # trainDF.groupBy("status", "status_encoder").agg(functions.count("*")).show()
-    
-    # # model estimate
-    # print(predDF.count())
-    # # print(lrCV.coefficients)
-    # # print(lrCV.intercept)
+    # print(lrCV.coefficients)
+    # print(lrCV.intercept)
     
     # # residual plot
     trainDF = (trainDF
                .withColumn("residual", functions.col("nextSeasonAvgAst") - functions.col("prediction")))
     
-    plot_residual(trainDF.select("count").collect(), trainDF.select("residual").collect(), "injury", "residual")
+    plot_residual(trainDF.select("count").collect(), trainDF.select("residual").collect(), "LOG(number of injuries)", "residual")
     plot_residual(trainDF.select("age").collect(), trainDF.select("residual").collect(), "age", "residual")
     plot_residual(trainDF.select("height").collect(), trainDF.select("residual").collect(), "height", "residual")
     plot_residual(trainDF.select("weight").collect(), trainDF.select("residual").collect(), "weight", "residual")
@@ -151,7 +141,6 @@ def main():
 
 if __name__ == '__main__':
     player_inputs = sys.argv[1]
-    outputs = sys.argv[2]
     spark = SparkSession.builder.appName('example code').getOrCreate()
     assert spark.version >= '3.0'  # make sure we have Spark 3.0+
     spark.sparkContext.setLogLevel('WARN')

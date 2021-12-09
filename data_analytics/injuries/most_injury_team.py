@@ -17,7 +17,8 @@ def main(inputs):
     injuries = (spark.read.format("csv")
                 .option("header", "true")
                 .schema(injuries_schema)
-                .load(inputs))
+                .load(inputs)
+                .repartition(8))
     # looking into players who get injuries most
     # Bobcats change team name to Hornets, so we combine two rows into one
     most_injury_team = (injuries

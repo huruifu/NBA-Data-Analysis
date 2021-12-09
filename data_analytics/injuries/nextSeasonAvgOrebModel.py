@@ -7,7 +7,6 @@ from pyspark.ml.evaluation import RegressionEvaluator
 
 from plot_tools import plot_validation_result, plot_corr, plot_scatter, plot_residual, plot_featureImportance
 
-import re
 import sys
 assert sys.version_info >= (3, 5)  # make sure we have Python 3.5+
 
@@ -49,13 +48,9 @@ def main():
               .option("header", "true")
               .schema(player_schema)
               .csv(player_inputs)
-              .where(~functions.col("totalFga").isNull())
-              .where(~functions.col("totalFgm").isNull())
               .repartition(8))
 
     train, validation = player.randomSplit([0.6, 0.4])
-    print(train.count())
-    print(validation.count())
     train = train.cache()
     validation = validation.cache()
     position_indexer = StringIndexer(
@@ -95,7 +90,7 @@ def main():
     #         .baseOn([gbtr.predictionCol, 'prediction']) 
     #         .build())
     rfr = RandomForestRegressor(featuresCol="features", labelCol="nextSeasonAvgOreb",
-                        numTrees=5, maxDepth=5, seed=42)
+                        numTrees=8, maxDepth=5, seed=42)
     grid = (ParamGridBuilder()
             .baseOn({rfr.labelCol: 'nextSeasonAvgOreb'}) 
             .baseOn([rfr.featuresCol, "features"])
@@ -112,7 +107,6 @@ def main():
     r2 = r2_evaluator.evaluate(predDF)
     print(f"r2 validation for predicting nextSeasonAvgOreb is {r2}")
     treeCV = rfrModelCV.stages[-1].bestModel
-    # trainDF.groupBy("player_position", "player_position_index").agg(functions.count("*")).show()
     # print(predDF.count())
     # print(treeCV.featureImportances.toArray())
     plot_featureImportance(["player_position_index", "status_index", "count", "avgOreb", "nextSeasonAge",
@@ -137,7 +131,6 @@ def main():
 
 if __name__ == '__main__':
     player_inputs = sys.argv[1]
-    outputs = sys.argv[2]
     spark = SparkSession.builder.appName('example code').getOrCreate()
     assert spark.version >= '3.0'  # make sure we have Spark 3.0+
     spark.sparkContext.setLogLevel('WARN')

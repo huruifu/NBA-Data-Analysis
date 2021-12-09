@@ -24,6 +24,8 @@ The dataset used in this project come from following sources.
 
 * https://data.world/datadavis/nba-salaries/workspace/file?filename=salaries_1985to2018.csv
 
+* https://www.si.com/nba/2020/12/14/top-100-nba-players-2021-daily-cover
+
 
 In this project, PySpark and scikit-learn are used to perform etl and data analytics. In addition, matplotlib.pyplot, pandas, seaborn and wordcloud packages are used to achieve data visuation.
 

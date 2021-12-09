@@ -7,16 +7,11 @@ from pyspark.ml import Pipeline
 from pyspark.ml.feature import StringIndexer, VectorAssembler, SQLTransformer
 from pyspark.ml.classification import RandomForestClassifier
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
-<<<<<<< HEAD
-
-import matplotlib.pyplot as plt
-=======
 from pyspark.sql.window import Window
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 import seaborn as sns
 import numpy as np
->>>>>>> d193685cc08bb9ef2bd73ccfd02fd4dc5a550186
 
 
 def champion_team(year, name):
@@ -36,15 +31,6 @@ def champion_team(year, name):
         return 'no'
 
 
-<<<<<<< HEAD
-def main(team_summary_path, team_rank_path, model_file):
-    team_summary = spark.read.option("delimiter", ",").option("header", "true").csv(team_summary_path)
-    team_summary = team_summary.withColumn('year', team_summary['year'].cast(types.StringType()))
-    team_rank = spark.read.option("delimiter", ",").option("header", "true").csv(team_rank_path)
-    team_rank = team_rank.withColumn('year', team_rank['year'].cast(types.StringType()))
-    team_rank = team_rank.withColumnRenamed('TEAM_ID', 'dup_TEAM_ID') \
-                            .withColumnRenamed('year', 'dup_year')
-=======
 def main(team_summary_path, team_rank_path):
     team_summary = spark.read.option("delimiter", ",").option("header", "true").csv(team_summary_path)
     team_summary = team_summary.withColumn('year', team_summary['year'].cast(types.StringType())).cache()
@@ -53,16 +39,11 @@ def main(team_summary_path, team_rank_path):
     team_rank = team_rank.withColumnRenamed('TEAM_ID', 'dup_TEAM_ID') \
                             .withColumnRenamed('year', 'dup_year').cache()
     set_champion = functions.udf(champion_team, types.StringType())
->>>>>>> d193685cc08bb9ef2bd73ccfd02fd4dc5a550186
     team = team_summary.join(functions.broadcast(team_rank),
                              (team_summary.TEAM_ID == team_rank.dup_TEAM_ID)
                                           & (team_summary.year == team_rank.dup_year)) \
                         .drop('dup_TEAM_ID', 'dup_year','STANDINGSDATE', 'RETURNTOPLAY')
     team = team.dropna()
-<<<<<<< HEAD
-    set_champion = functions.udf(champion_team, types.StringType())
-=======
->>>>>>> d193685cc08bb9ef2bd73ccfd02fd4dc5a550186
     team = team.withColumn('champion', set_champion(team.year, team.TEAM))
     team = team.withColumn('avg_PTS_home', team['avg_PTS_home'].cast(types.FloatType())) \
                .withColumn('avg_REB_home', team['avg_REB_home'].cast(types.FloatType())) \
@@ -73,13 +54,6 @@ def main(team_summary_path, team_rank_path):
                .withColumn('W', team['W'].cast(types.FloatType())) \
                .withColumn('W_PCT', team['W_PCT'].cast(types.FloatType())) \
                .withColumn('year', team['year'].cast(types.FloatType()))
-<<<<<<< HEAD
-    # display champion
-    champion = team.where(team.champion == 'yes')
-    champion.sort('year').show()
-    team = team.select('avg_PTS_home', 'avg_REB_home', 'avg_AST_home', 'avg_PTS_away', 'avg_REB_away', \
-                       'avg_AST_away', 'W', 'W_PCT', 'year', 'champion')
-=======
 
     # draw correlation graph
     team = team.select('avg_PTS_home', 'avg_REB_home', 'avg_AST_home', 'avg_PTS_away', 'avg_REB_away',
@@ -94,17 +68,12 @@ def main(team_summary_path, team_rank_path):
     # plt.show()
 
     # building model
->>>>>>> d193685cc08bb9ef2bd73ccfd02fd4dc5a550186
     train, validation = team.randomSplit([0.75, 0.25])
     train = train.cache()
     validation = validation.cache()
     assembler = VectorAssembler(
-<<<<<<< HEAD
-        inputCols=['avg_PTS_home', 'avg_REB_home', 'avg_AST_home', 'avg_PTS_away', 'avg_REB_away', 'avg_AST_away', 'W', 'W_PCT'],
-=======
         inputCols=['avg_PTS_home', 'avg_REB_home', 'avg_AST_home', 'avg_PTS_away',
                    'avg_REB_away', 'avg_AST_away', 'W_PCT'],
->>>>>>> d193685cc08bb9ef2bd73ccfd02fd4dc5a550186
         outputCol='features', handleInvalid="skip")
     indexer = StringIndexer(inputCol='champion', outputCol='label')
     classifier = RandomForestClassifier(labelCol="label", featuresCol="features", numTrees=10)
@@ -114,27 +83,18 @@ def main(team_summary_path, team_rank_path):
     evaluator = MulticlassClassificationEvaluator(predictionCol="prediction", labelCol="label")
     score = evaluator.evaluate(predictions)
     print('Validation score for model: %g' % (score,))
-<<<<<<< HEAD
-    feature_list = ['avg_PTS_home', 'avg_REB_home', 'avg_AST_home', 'avg_PTS_away', 'avg_REB_away', 'avg_AST_away', 'W', 'W_PCT']
-    importances = model.stages[-1].featureImportances
-    x_values = list(range(len(importances)))
-=======
     feature_list = ['avg_PTS_home', 'avg_REB_home', 'avg_AST_home', 'avg_PTS_away',
                     'avg_REB_away', 'avg_AST_away', 'W_PCT']
     importances = model.stages[-1].featureImportances
     x_values = list(range(len(importances)))
 
     # draw feature importance graph
->>>>>>> d193685cc08bb9ef2bd73ccfd02fd4dc5a550186
     plt.figure()
     plt.bar(x_values, importances, orientation='vertical')
     plt.xticks(x_values, feature_list, rotation='vertical', fontsize = 4.5)
     plt.ylabel('Importance')
     plt.xlabel('Feature')
     plt.title('Champion Feature Importances')
-<<<<<<< HEAD
-    plt.savefig('champion.png')
-=======
     plt.savefig('champion_feature.png')
     # plt.show()
 
@@ -182,21 +142,12 @@ def main(team_summary_path, team_rank_path):
     plt.title('Probability plot of championship and regular season rankings')
     plt.savefig('rank_and_champion.png')
     # plt.show()
->>>>>>> d193685cc08bb9ef2bd73ccfd02fd4dc5a550186
 
 
 if __name__ == '__main__':
     team_summary = sys.argv[1]
     team_rank = sys.argv[2]
-<<<<<<< HEAD
-    model_file = sys.argv[3]
-    spark = SparkSession.builder.appName('champion analysis').getOrCreate()
-    spark.sparkContext.setLogLevel('WARN')
-    assert spark.version >= '2.4'  # make sure we have Spark 2.4+
-    main(team_summary, team_rank, model_file)
-=======
     spark = SparkSession.builder.appName('champion analysis').getOrCreate()
     spark.sparkContext.setLogLevel('WARN')
     assert spark.version >= '2.4'  # make sure we have Spark 2.4+
     main(team_summary, team_rank)
->>>>>>> d193685cc08bb9ef2bd73ccfd02fd4dc5a550186

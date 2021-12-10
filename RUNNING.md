@@ -1,6 +1,6 @@
 # All commands used to run codes in this project
 
-In this project, PySpark and scikit-learn are used to perform etl and data analytics. In addition, matplotlib.pyplot, pandas, seaborn and wordcloud packages are used to achieve data visuation.
+In this project, PySpark and scikit-learn are used to perform etl and data analytics. In addition, matplotlib.pyplot, pandas, seaborn and wordcloud packages are used to achieve data visuation. Before running code, you need to download these packages.
 
 ## ETL Process:
 

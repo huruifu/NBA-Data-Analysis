@@ -12,7 +12,10 @@ def main(inputs):
         types.StructField('Team', types.StringType()),
         types.StructField('Relinquished', types.StringType()),
         types.StructField('injury_name', types.StringType()),
-        types.StructField('status', types.StringType())
+        types.StructField('status', types.StringType()),
+        types.StructField('year', types.IntegerType()),
+        types.StructField('month', types.IntegerType()),
+        types.StructField('played_season', types.IntegerType())
     ])
     injuries = (spark.read.format("csv")
                 .option("header", "true")

@@ -61,6 +61,8 @@
 * spark-submit data_analytics/nba_salary_analysis.py data/clean_data/salary_etl
 (Running file:data_analytics/nba_salary_analysis.py, Input:data/clean_data/salary_etl, Analyze and predict on salary)
 
+## Data Analytics on exploring new player's model players
+
 * spark-submit data_analytics/newplayer_prepare.py data/clean_data/player_info.csv data/etl_player_summary_output data/input_summary
 (running file: data_analytics/newplayer_prepare.py , Input: data/clean_data/player_info.csv, Output: data/etl_player_summary_output data/input_summary, joining the information of player’s physical conditions and the information of player’s NBA performance prepared for further analysis)
 

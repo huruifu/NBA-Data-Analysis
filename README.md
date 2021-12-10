@@ -35,6 +35,8 @@ After performing etl process, the cleaned dataset will be stored in Firebase, wh
 
 Inside folder data_analytics, there are files about performing data analytics on the four topics this project focuses on.
 
+A detail description on how to run the code is in RUNNING.md
+
 A web application is also designed to present the results of the project. The web application is implemented by using React libray, and connect to the Firebase which stores the cleaned dataset.
 
 In order to run the web application on the local computers, there are following steps needed to do.

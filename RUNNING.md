@@ -75,6 +75,8 @@ In this project, PySpark and scikit-learn are used to perform etl and data analy
 
 ## Web Application
 
+The web application is deployed to Heroku, the url is: https://nba-data-analytics.herokuapp.com/
+
 In order to run the web application on the local computers, there are following steps needed to do.
 
 * If you do not have node or npm, download node and npm.

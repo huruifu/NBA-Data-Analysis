@@ -35,7 +35,9 @@ Inside folder data_analytics, there are files about performing data analytics on
 
 A detail description on how to run all codes in the project is in RUNNING.md
 
-A web application is also designed to present the results of the project. The web application is implemented by using React libray, and connect to the Firebase which stores the cleaned dataset.
+A web application is also designed to present the results of the project. The web application is implemented by using React libray, and connect to the Firebase which stores the cleaned dataset. 
+
+The web application is deployed to Heroku, the url is: https://nba-data-analytics.herokuapp.com/
 
 In order to run the web application on the local computers, there are following steps needed to do.
 

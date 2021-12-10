@@ -1,4 +1,8 @@
-# ETL Process:
+# All commands used to run codes in this project
+
+In this project, PySpark and scikit-learn are used to perform etl and data analytics. In addition, matplotlib.pyplot, pandas, seaborn and wordcloud packages are used to achieve data visuation.
+
+## ETL Process:
 
 * spark-submit data_etl/injuries_etl.py data/NBA/injuries_2010-2020.csv outputs (running file: data_etl/injuries_etl.py, input: data/NBA/injuries_2010-2020.csv, output: outputs, performing Injury Dataset ETL Process)
 
@@ -18,9 +22,9 @@
 
 
 
-# Data Analytics:
+## Data Analytics:
 
-## Age & Injury On Player's stat
+### Age & Injury On Player's stat
 
 * spark-submit data_analytics/injuries/most_injury_player.py data/clean_data/clean_injuries.csv (running file: data_analytics/injuries/most_injury_player.py, input: data/clean_data/clean_injuries.csv, plotting graph about players who get injury most)
 
@@ -43,7 +47,7 @@
 * spark-submit data_analytics/injuries/nextSeasonAvgOrebModel.py data_analytics/injuries/dataset/player.csv outputs (running file: data_analytics/injuries/nextSeasonAvgOrebModel.py input: data_analytics/injuries/dataset/player.csv output: outputs, training model to predict next season average ofensive rebounds, and save the model)
 
 
-## MVP, ALL NBA Team and Champion 
+### MVP, ALL NBA Team and Champion 
 
 * spark-submit data_analytics/model/mvp_analysis.py data/etl_player_summary_justRegular data/clean_data/player_info.csv data/etl_team_summary_output data/clean_data/etl_team_rank_output
 (Running file: data_analytics/model/mvp_analysis.py , Input: data/etl_player_summary_justRegular, data/clean_data/player_info.csv, data/etl_team_summary_output, data/clean_data/etl_team_rank_output, Analyze the most influential factor in the selection of MVP)
@@ -54,12 +58,12 @@
 * spark-submit data_analytics/model/champion_analysis.py data/etl_team_summary_output data/clean_data/etl_team_rank_output
 (Running file: data_analytics/model/mvp_analysis.py , Input: data/etl_team_summary_output, data/clean_data/etl_team_rank_output, Find the key feature of championship based on the team regular season performance)
 
-## Salary Analytics
+### Salary Analytics
 
 * spark-submit data_analytics/nba_salary_analysis.py data/clean_data/salary_etl
 (Running file:data_analytics/nba_salary_analysis.py, Input:data/clean_data/salary_etl, Analyze and predict on salary)
 
-## Data Analytics on exploring new player's model players
+### Data Analytics on exploring new player's model players
 
 * spark-submit data_analytics/newplayer_prepare.py data/clean_data/player_info.csv data/etl_player_summary_output data/input_summary
 (running file: data_analytics/newplayer_prepare.py , Input: data/clean_data/player_info.csv, Output: data/etl_player_summary_output data/input_summary, joining the information of player’s physical conditions and the information of player’s NBA performance prepared for further analysis)
@@ -69,7 +73,7 @@
 
 
 
-# Web Application
+## Web Application
 
 In order to run the web application on the local computers, there are following steps needed to do.
 

@@ -27,15 +27,13 @@ The dataset used in this project come from following sources.
 * https://www.si.com/nba/2020/12/14/top-100-nba-players-2021-daily-cover
 
 
-In this project, PySpark and scikit-learn are used to perform etl and data analytics. In addition, matplotlib.pyplot, pandas, seaborn and wordcloud packages are used to achieve data visuation.
-
 Inside folder data_etl, there are files about performing etl in order to get clean data.
 
 After performing etl process, the cleaned dataset will be stored in Firebase, which is a nosql database hosted by Google.
 
 Inside folder data_analytics, there are files about performing data analytics on the four topics this project focuses on.
 
-A detail description on how to run the code is in RUNNING.md
+A detail description on how to run all codes in the project is in RUNNING.md
 
 A web application is also designed to present the results of the project. The web application is implemented by using React libray, and connect to the Firebase which stores the cleaned dataset.
 

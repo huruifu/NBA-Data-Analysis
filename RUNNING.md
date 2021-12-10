@@ -7,6 +7,12 @@
 * spark-submit data_etl/team_summary_etl.py data/nba/games.csv data/etl_team_summary_output
 (Running file: data_etl/team_summary_etl.py , Input: data/nba/games.csv, output:data/etl_team_summary_output, get team’s yearly stats)
 
+* spark-submit data_etl/nba_salary_etl.py data/nba/salary_1985to2018.csv data/nba/players_for_salary.csv data/etl_player_summary_output_noTeam data/clean_data/player_info.csv data/nba/injuries_2010-2020.csv data/clean_data/salary_etl
+(Running file:data_etl/nba_salary_etl.py, Input:data/nba/salary_1985to2018.csv data/nba/players_for_salary.csv data/etl_player_summary_output_noTeam data/clean_data/player_info.csv data/nba/injuries_2010-2020.csv, Output: data/clean_data/salary_etl, ETL: salary data)
+
+* spark-submit data_etl/team_ranking_etl.py data/nba/ranking.csv data/clean_data/etl_team_rank_output
+(running file: data_etl/team_ranking_etl.py , Input: data/nba/ranking.csv, output:data/clean_data/etl_team_rank_output, performing the team ranking Dataset ETL process)
+
 
 
 # Data Analytics:
@@ -54,9 +60,6 @@
 (Running file: data_analytics/model/mvp_analysis.py , Input: data/etl_team_summary_output, data/clean_data/etl_team_rank_output, Find the key feature of championship based on the team regular season performance)
 
 ## Salary Analytics
-
-* spark-submit data_etl/nba_salary_etl.py data/nba/salary_1985to2018.csv data/nba/players_for_salary.csv data/etl_player_summary_output_noTeam data/clean_data/player_info.csv data/nba/injuries_2010-2020.csv data/clean_data/salary_etl
-(Running file:data_etl/nba_salary_etl.py, Input:data/nba/salary_1985to2018.csv data/nba/players_for_salary.csv data/etl_player_summary_output_noTeam data/clean_data/player_info.csv data/nba/injuries_2010-2020.csv, Output: data/clean_data/salary_etl, ETL: salary data)
 
 * spark-submit data_analytics/nba_salary_analysis.py data/clean_data/salary_etl
 (Running file:data_analytics/nba_salary_analysis.py, Input:data/clean_data/salary_etl, Analyze and predict on salary)
